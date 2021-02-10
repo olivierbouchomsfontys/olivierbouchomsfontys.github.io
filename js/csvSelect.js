@@ -7,21 +7,9 @@ datasets = [
 ]
 
 const selectElement = document.querySelector("#select-dataset select");
-selectElement.addEventListener('change', onDatasetChange);
 
 window.onload = function () {
     selectElement.innerHTML = buildDatasetDropdownOptions();
-}
-
-function onDatasetChange(event){
-    event.preventDefault();
-
-    const selectedValue = selectElement.value;
-    const dataset = datasets.find(data => data.url === selectedValue);
-    console.log(selectedValue);
-
-    const graphRenderer = new GraphRenderer();
-    graphRenderer.renderGraphByCsv(dataset.url, dataset.dataKey, dataset.labelKey, document.getElementById("chart1"), "line");
 }
 
 function buildDatasetDropdownOptions(){

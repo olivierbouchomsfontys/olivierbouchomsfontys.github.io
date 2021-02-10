@@ -36,36 +36,36 @@
             <!-- TODO Add graphs and controls here -->
         </div>
         <div>
-            <h2>Demo elementen</h2>
-            <div class="row">
-                <div class="col col-sm-12">
-                    <label>
-                        Label
-                        <input type="text" class="input-primary" value="Input element" />
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col col-sm-12">
-                    <label>
-                        Label
-                        <select class="select-primary">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col col-sm-12">
-                    <button class="btn btn-primary">
-                        Knop
-                    </button>
-                </div>
-            </div>
+<!--            <h2>Demo elementen</h2>-->
+<!--            <div class="row">-->
+<!--                <div class="col col-sm-12">-->
+<!--                    <label>-->
+<!--                        Label-->
+<!--                        <input type="text" class="input-primary" value="Input element" />-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <div class="col col-sm-12">-->
+<!--                    <label>-->
+<!--                        Label-->
+<!--                        <select class="select-primary">-->
+<!--                            <option>1</option>-->
+<!--                            <option>2</option>-->
+<!--                            <option>3</option>-->
+<!--                            <option>4</option>-->
+<!--                            <option>5</option>-->
+<!--                        </select>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <div class="col col-sm-12">-->
+<!--                    <button class="btn btn-primary">-->
+<!--                        Knop-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
         <h1>About Vitality Living Lab</h1>
         <p>
@@ -94,15 +94,19 @@
         <p>
             <a href="https://sportsandtechnology.com/vitality-living-lab/">More info</a>
         </p>
+
+        <!-- Add your site or application content here -->
+        <div class="select-dataset-container">
+            <form id="select-dataset">
+                <label> Dataset
+                    <select class="select-primary"></select>
+                </label>
+            </form>
+        </div>
+
+        <canvas id="chart1"></canvas>
     </div>
 </main>
-
-<p>Hello world!</p>
-<canvas id="chart1"></canvas>
-<canvas id="chart2"></canvas>
-<canvas id="chart3"></canvas>
-<canvas id="chart4"></canvas>
-<canvas id="chart5"></canvas>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -116,16 +120,12 @@
 <script src="js/libs/bootstrap.bundle.js"></script>
 <script src="js/libs/Chart.min.js"></script>
 <script src="js/libs/d3.v6.min.js"></script>
+
+<script src="js/model/dataset.js"></script>
+
 <script src="js/graphRenderer.js"></script>
+<script src="js/csvSelect.js"></script>
 </body>
 
-<script>
-    var graphRenderer = new GraphRenderer();
-    graphRenderer.renderGraphByCsv('csv/LifeExpectation.csv', 'Life expectation', 'Age', document.getElementById("chart1"), "line");
-    graphRenderer.renderGraphByCsv('csv/ConformExerciseNorm.csv', 'Conform exercise norm', 'Age', document.getElementById("chart2"), "line");
-    graphRenderer.renderGraphByCsv('csv/SubscriptionToSports.csv', 'Subscription to sports', 'Age', document.getElementById("chart3"), "line");
-    graphRenderer.renderGraphByCsv('csv/SportsWeekly.csv', 'Sports weekly', 'Age', document.getElementById("chart4"), "line");
-    graphRenderer.renderGraphByCsv('csv/ParticipatesInSportsAssociation.csv', 'Participates in sports association', 'Age', document.getElementById("chart5"), "line");
-</script>
 
 </html>

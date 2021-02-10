@@ -81,42 +81,6 @@ class GraphRenderer {
         const layout = {
             autosize: true,
             height: element.offsetHeight,
-            scene: {
-                aspectratio: {
-                    x: 1,
-                    y: 1,
-                    z: 1
-                },
-                camera: {
-                    center: {
-                        x: 0,
-                        y: 0,
-                        z: 0
-                    },
-                    eye: {
-                        x: 1.25,
-                        y: 1.25,
-                        z: 1.25
-                    },
-                    up: {
-                        x: 0,
-                        y: 0,
-                        z: 1
-                    }
-                },
-                xaxis: {
-                    type: 'linear',
-                    zeroline: false
-                },
-                yaxis: {
-                    type: 'linear',
-                    zeroline: false
-                },
-                zaxis: {
-                    type: 'linear',
-                    zeroline: false
-                }
-            },
             title: '3d point clustering',
             width: element.offsetWidth
         };

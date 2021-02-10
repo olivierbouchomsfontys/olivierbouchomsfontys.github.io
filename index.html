@@ -17,13 +17,13 @@
 
 <body>
 
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Vitality Living Lab</a>
-            </div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Vitality Living Lab</a>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <main>
         <div class="container">
@@ -63,70 +63,93 @@
                 <a href="https://sportsandtechnology.com/vitality-living-lab/">More info</a>
             </p>
 
-            <!-- Add your site or application content here -->
-            <div class="select-dataset-container">
-                <form id="select-dataset">
-                    <label> Dataset
-                        <select class="select-primary"></select>
-                    </label>
+        <!-- Add your site or application content here -->
+        <div class="select-dataset-container">
+            <form id="select-dataset">
+                <label> Dataset
+                    <select class="select-primary" onchange="updateSelectChartType()"></select>
+                </label>
 
-                    <label>
-                        Chart type
-                        <select class="select-primary" id="selectChartType">
-                            <option value="line">Line graph</option>
-                            <option value="bar">Bar graph</option>
-                            <option value="doughnut">Doughnut</option>
-                            <option value="pie">Pie</option>
-                        </select>
-                    </label>
-                    <button onclick="LoadCharts()" type="button" class="btn btn-primary">
-                        Get charts
-                    </button>
-                </form>
-            </div>
-            <div id="loading-message"></div>
-            <canvas id="chart1"></canvas>
-            <div id="3dPlot1"></div>
+                <label>
+                    Chart type
+                    <select class="select-primary" id="selectChartType">
+
+                    </select>
+                </label>
+
+                <button onclick="LoadCharts()" type="button" class="btn btn-primary">
+                    Get charts
+                </button>
+
+                <div id="loading-message"></div>
+                <canvas id="chart1"></canvas>
+                <div id="3dPlot1"></div>
+            </form>
         </div>
-    </main>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
-    <script src="js/libs/bootstrap.js"></script>
-    <script src="js/libs/bootstrap.bundle.js"></script>
-    <script src="js/libs/bootstrap.js"></script>
-    <script src="js/libs/bootstrap.bundle.js"></script>
-    <script src="js/libs/Chart.min.js"></script>
-    <script src="js/libs/d3.v6.min.js"></script>
-    <script src="js/libs/plotly.v1.58.4.js"></script>
-    <script src="js/libs/please.js"></script>
-    <script src="js/model/dataset.js"></script>
-    <script src="js/graphRenderer.js"></script>
-    <script src="js/csvSelect.js"></script>
-
+<script src="js/libs/bootstrap.js"></script>
+<script src="js/libs/bootstrap.bundle.js"></script>
+<script src="js/libs/bootstrap.js"></script>
+<script src="js/libs/bootstrap.bundle.js"></script>
+<script src="js/libs/Chart.min.js"></script>
+<script src="js/libs/d3.v6.min.js"></script>
+<script src="js/libs/plotly.v1.58.4.js"></script>
+<script src="js/libs/please.js"></script>
+<script src="js/model/dataset.js"></script>
+<script src="js/model/threeDimensionalDataset.js"></script>
+<script src="js/model/graphType.js"></script>
+<script src="js/graphRenderer.js"></script>
+<script src="js/csvSelect.js"></script>
 </body>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        updateSelectChartType();
+    });
 
     function LoadCharts() {
         // todo make chart type compatiable with 3D charts
-        const chartType = selectChartType.value;
-
-        let graphRenderer3D = new GraphRenderer();
-        graphRenderer3D.render3dPlotByCsv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_shape.csv', document.getElementById('3dPlot1'), 'x', 'y', 'z', 'scatter3d');
+        const graphTypeSelector = document.getElementById("selectChartType")
+        const chartType = graphTypeSelector.value;
 
         const selectedValue = selectElement.value;
         const dataset = datasets.find(data => data.url === selectedValue);
-
-        const chartArea = document.getElementById("chart1");
+        const dataGraphType = graphTypeSelector.options[graphTypeSelector.selectedIndex].getAttribute("data-graph-type");
 
         const graphRenderer = new GraphRenderer();
-        graphRenderer.renderGraphByCsv(dataset.url, dataset.dataKey, dataset.labelKey, document.getElementById("chart1"), chartType);
+        if (dataGraphType === '2d') {
+            graphRenderer.renderGraphByCsv(dataset.url, dataset.dataKey, dataset.labelKey, document.getElementById("chart1"), chartType);
+        } else {
+            graphRenderer.render3dPlotByCsv(dataset.url, document.getElementById("3dPlot1"), dataset.xKey, dataset.yKey, dataset.zKey, chartType);
+        }
+    }
 
+    function updateSelectChartType() {
+        knownGraphTypes = [
+            new GraphType("line", "2d"),
+            new GraphType("bar", "2d"),
+            new GraphType("doughnut", "2d"),
+            new GraphType("pie", "2d"),
+            new GraphType("scatter3d", "3d"),
+        ];
+        const dataSetType = selectElement.options[selectElement.selectedIndex].getAttribute("data-set-type");
+        const support3D = dataSetType == ThreeDimensionalDataSet.name;
+        let html = ""
+        for (let graphType of knownGraphTypes) {
+            if (!support3D && graphType.type === '3d') {
+                continue;
+            }
+
+            html += "<option data-graph-type='" + graphType.type + "' value='" + graphType.name + "'>" + graphType.name + "</option>"
+        }
+        document.getElementById("selectChartType").innerHTML = html;
     }
 
 </script>

@@ -19,6 +19,7 @@
 
 <!-- Add your site or application content here -->
 <p>Hello world!</p>
+<div id="3dPlot1"></div>
 <canvas id="chart1"></canvas>
 <canvas id="chart2"></canvas>
 <canvas id="chart3"></canvas>
@@ -35,11 +36,13 @@
 <script src="js/libs/bootstrap.bundle.js"></script>
 <script src="js/libs/Chart.min.js"></script>
 <script src="js/libs/d3.v6.min.js"></script>
+<script src="js/libs/plotly.v1.58.4.js"></script>
 <script src="js/graphRenderer.js"></script>
 </body>
 
 <script>
     var graphRenderer = new GraphRenderer();
+    graphRenderer.render3dPlotByCsv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_shape.csv',document.getElementById('3dPlot1'), 'x', 'y', 'z', 'scatter3d');
     graphRenderer.renderGraphByCsv('csv/LifeExpectation.csv', 'Life expectation', 'Age', document.getElementById("chart1"), "line");
     graphRenderer.renderGraphByCsv('csv/ConformExerciseNorm.csv', 'Conform exercise norm', 'Age', document.getElementById("chart2"), "line");
     graphRenderer.renderGraphByCsv('csv/SubscriptionToSports.csv', 'Subscription to sports', 'Age', document.getElementById("chart3"), "line");

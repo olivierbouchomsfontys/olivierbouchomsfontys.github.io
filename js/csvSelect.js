@@ -7,15 +7,27 @@ datasets = [
     new ThreeDimensionalDataSet("Work", "csv/Work.csv", 'Age', 'Satisfied with work circumstances', 'Satisfied with work'),
 ]
 
-const selectElement = document.querySelector("#select-dataset select");
+const selectFirstElement = document.querySelector("select#dataset-one");
+const selectSecondElement = document.querySelector("select#dataset-two");
 
 window.onload = function () {
-    selectElement.innerHTML = buildDatasetDropdownOptions();
+    selectFirstElement.innerHTML += buildDatasetDropdownOptions();
+    selectSecondElement.innerHTML += buildDatasetDropdownOptions(true);
+
+    updateSelectChartType();
 }
 
-function buildDatasetDropdownOptions(){
-    let html = ""
+selectFirstElement.addEventListener('change', () => {
+    selectSecondElement.innerHTML = buildDatasetDropdownOptions(true, selectFirstElement.value);
+});
+
+function buildDatasetDropdownOptions(addEmpty = false, excludeValue = null){
+    let html = addEmpty ? "<option value=''>...</option>" : "";
     for (let dataset of datasets){
+        if (excludeValue !== null && dataset.url === excludeValue){
+            continue;
+        }
+
         html += "<option data-set-type='"+dataset.constructor.name+"' value='" + dataset.url + "'>" + dataset.name + "</option>"
     }
 

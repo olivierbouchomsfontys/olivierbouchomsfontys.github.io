@@ -1,4 +1,10 @@
 class GraphRenderer {
+    colorPrimary = getComputedStyle(document.documentElement).getPropertyValue('--graph-primary');
+    colorSecondary = getComputedStyle(document.documentElement).getPropertyValue('--graph-secondary');
+    colorTertiary = getComputedStyle(document.documentElement).getPropertyValue('--graph-tertiary');
+    colorQuaternary = getComputedStyle(document.documentElement).getPropertyValue('--graph-quaternary');
+    chart;
+
     renderGraphByCsv(url, dataKey, labelKey, element, graphType) {
         const graphRenderer = this;
         d3.csv(url)
@@ -42,16 +48,25 @@ class GraphRenderer {
     }
 
     renderGraph(data, element, graphType, labels = null) {
-        new Chart(element, {
+        if (this.chart) {
+            this.chart.destroy();
+        }
+
+        this.chart = new Chart(element, {
             type: graphType,
             data: {
                 labels: labels,
                 datasets: [
                     {
-                        data: data
+                        data: data,
+                        borderColor: this.getBorderColor(graphType),
+                        backgroundColor: this.getBackgroundColor(data, graphType),
+                        fillColor: this.colorPrimary,
+                        highlightFill: this.colorSecondary,
+                        highlightStroke: this.colorSecondary
                     }
                 ]
-            }
+            },
         });
     }
 
@@ -107,47 +122,55 @@ class GraphRenderer {
         const layout = {
             autosize: true,
             height: element.offsetHeight,
-            scene: {
-                aspectratio: {
-                    x: 1,
-                    y: 1,
-                    z: 1
-                },
-                camera: {
-                    center: {
-                        x: 0,
-                        y: 0,
-                        z: 0
-                    },
-                    eye: {
-                        x: 1.25,
-                        y: 1.25,
-                        z: 1.25
-                    },
-                    up: {
-                        x: 0,
-                        y: 0,
-                        z: 1
-                    }
-                },
-                xaxis: {
-                    type: 'linear',
-                    zeroline: false
-                },
-                yaxis: {
-                    type: 'linear',
-                    zeroline: false
-                },
-                zaxis: {
-                    type: 'linear',
-                    zeroline: false
-                }
-            },
             title: '3d point clustering',
             width: element.offsetWidth
         };
 
         Plotly.newPlot(element, plotData, layout);
 
+    }
+
+    getBackgroundColor(data, graphType) {
+        switch (graphType) {
+            case 'line':
+                return this.getBackgroundColorLine();
+            default:
+                return this.getBackgroundColorOther(data);
+        }
+    }
+
+    getBackgroundColorLine() {
+        return 'transparent';
+    }
+
+    getBackgroundColorOther(data) {
+        if (data.length > 4) {
+            return Please.make_color({ hue: 50, saturation: 0.55, colors_returned: data.length + 1 });
+        }
+
+        return data.map((row, index) => {
+            if (index % 4 === 0) {
+                return this.colorQuaternary;
+            }
+
+            if (index % 3 === 0) {
+                return this.colorTertiary;
+            }
+
+            if (index % 2 === 0) {
+                return this.colorSecondary;
+            }
+
+            return this.colorPrimary;
+        });
+    }
+
+    getBorderColor(graphType) {
+        switch (graphType) {
+            case 'line':
+                return this.colorPrimary;
+            default:
+                return 'transparent';
+        }
     }
 }

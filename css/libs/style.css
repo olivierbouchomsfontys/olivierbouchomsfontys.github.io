@@ -3,6 +3,11 @@
     --secondary: #f37021;
     --accent: #e09900;
 
+    --graph-primary: #e09900;
+    --graph-secondary: #1e4564;
+    --graph-tertiary: #b1dbec;
+    --graph-quaternary: #eeeeee;
+
     --text-primary: rgb(43, 43, 43);
     --text-secondary: #1e4564;
     --text-accent: #f37021;
@@ -80,6 +85,10 @@ label > select {
 }
 
 /* Buttons */
+
+.btn {
+    vertical-align: baseline!important;
+}
 
 .btn-primary {
     color: var(--accent);

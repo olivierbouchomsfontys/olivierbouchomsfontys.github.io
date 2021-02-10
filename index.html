@@ -116,13 +116,11 @@
                     Get charts
                 </button>
 
-
+                <div id="loading-message"></div>
+                <canvas id="chart1"></canvas>
+                <div id="3dPlot1"></div>
             </form>
-
         </div>
-        <div id="loading-message"></div>
-        <canvas id="chart1"></canvas>
-        <div id="3dPlot1"></div>
     </div>
 </main>
 
@@ -160,6 +158,7 @@
         const selectedValue = selectElement.value;
         const dataset = datasets.find(data => data.url === selectedValue);
         const dataGraphType = graphTypeSelector.options[graphTypeSelector.selectedIndex].getAttribute("data-graph-type");
+
         const graphRenderer = new GraphRenderer();
         if (dataGraphType === '2d') {
             graphRenderer.renderGraphByCsv(dataset.url, dataset.dataKey, dataset.labelKey, document.getElementById("chart1"), chartType);

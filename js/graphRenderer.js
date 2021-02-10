@@ -4,6 +4,7 @@ class GraphRenderer {
     colorTertiary = getComputedStyle(document.documentElement).getPropertyValue('--graph-tertiary');
     colorQuaternary = getComputedStyle(document.documentElement).getPropertyValue('--graph-quaternary');
     chart;
+    plotElement;
 
     renderGraphByCsv(url, dataKey, labelKey, element, graphType) {
         const graphRenderer = this;
@@ -48,9 +49,7 @@ class GraphRenderer {
     }
 
     renderGraph(data, element, graphType, labels = null) {
-        if (this.chart) {
-            this.chart.destroy();
-        }
+        this.destroyAll();
 
         this.chart = new Chart(element, {
             type: graphType,
@@ -90,6 +89,9 @@ class GraphRenderer {
     }
 
     render3dPlot(data, element, xKey, yKey, zKey, graphType) {
+        this.destroyAll();
+        this.plotElement = element;
+
         function unpack(rows, key) {
             return rows.map(function (row) {
                 return row[key];
@@ -126,7 +128,7 @@ class GraphRenderer {
             width: element.offsetWidth
         };
 
-        Plotly.newPlot(element, plotData, layout);
+        this.plot = Plotly.newPlot(element, plotData, layout);
 
     }
 
@@ -171,6 +173,16 @@ class GraphRenderer {
                 return this.colorPrimary;
             default:
                 return 'transparent';
+        }
+    }
+
+    destroyAll(){
+        if (this.chart) {
+            this.chart.destroy();
+        }
+
+        if (this.plotElement) {
+            Plotly.purge(this.plotElement);
         }
     }
 }

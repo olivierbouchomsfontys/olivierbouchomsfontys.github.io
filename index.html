@@ -98,6 +98,21 @@
 </main>
 
 <p>Hello world!</p>
+
+<label>
+    Chart type
+    <select class="select-primary" id="selectChartType" onchange="LoadCharts()">
+        <option value="line">line</option>
+        <option value="bar">bar</option>
+        <option value="doughnut">doughnut</option>
+        <option value="pie">pie</option>
+
+    </select>
+</label>
+
+
+
+
 <canvas id="chart1"></canvas>
 <canvas id="chart2"></canvas>
 <canvas id="chart3"></canvas>
@@ -119,13 +134,26 @@
 <script src="js/graphRenderer.js"></script>
 </body>
 
+
+
+
 <script>
-    var graphRenderer = new GraphRenderer();
-    graphRenderer.renderGraphByCsv('csv/LifeExpectation.csv', 'Life expectation', 'Age', document.getElementById("chart1"), "line");
-    graphRenderer.renderGraphByCsv('csv/ConformExerciseNorm.csv', 'Conform exercise norm', 'Age', document.getElementById("chart2"), "line");
-    graphRenderer.renderGraphByCsv('csv/SubscriptionToSports.csv', 'Subscription to sports', 'Age', document.getElementById("chart3"), "line");
-    graphRenderer.renderGraphByCsv('csv/SportsWeekly.csv', 'Sports weekly', 'Age', document.getElementById("chart4"), "line");
-    graphRenderer.renderGraphByCsv('csv/ParticipatesInSportsAssociation.csv', 'Participates in sports association', 'Age', document.getElementById("chart5"), "line");
+    
+    function LoadCharts(){
+        const chartType = selectChartType.value;
+        
+        let graphRenderer = new GraphRenderer();
+        graphRenderer.renderGraphByCsv('csv/LifeExpectation.csv', 'Life expectation', 'Age', document.getElementById("chart1"), chartType);
+        graphRenderer.renderGraphByCsv('csv/ConformExerciseNorm.csv', 'Conform exercise norm', 'Age', document.getElementById("chart2"), chartType);
+        graphRenderer.renderGraphByCsv('csv/SubscriptionToSports.csv', 'Subscription to sports', 'Age', document.getElementById("chart3"), chartType);
+        graphRenderer.renderGraphByCsv('csv/SportsWeekly.csv', 'Sports weekly', 'Age', document.getElementById("chart4"), chartType);
+        graphRenderer.renderGraphByCsv('csv/ParticipatesInSportsAssociation.csv', 'Participates in sports association', 'Age', document.getElementById("chart5"), chartType);
+
+    } 
+
+    document.addEventListener("DOMContentLoaded", function() {
+        LoadCharts();
+    });
 </script>
 
 </html>

@@ -114,6 +114,8 @@
         updateSelectChartType();
     });
 
+    const graphRenderer = new GraphRenderer();
+
     function LoadCharts() {
         // todo make chart type compatiable with 3D charts
         const graphTypeSelector = document.getElementById("selectChartType")
@@ -123,7 +125,6 @@
         const dataset = datasets.find(data => data.url === selectedValue);
         const dataGraphType = graphTypeSelector.options[graphTypeSelector.selectedIndex].getAttribute("data-graph-type");
 
-        const graphRenderer = new GraphRenderer();
         if (dataGraphType === '2d') {
             graphRenderer.renderGraphByCsv(dataset.url, dataset.dataKey, dataset.labelKey, document.getElementById("chart1"), chartType);
         } else {

@@ -3,6 +3,7 @@ class GraphRenderer {
     colorSecondary = getComputedStyle(document.documentElement).getPropertyValue('--graph-secondary');
     colorTertiary = getComputedStyle(document.documentElement).getPropertyValue('--graph-tertiary');
     colorQuaternary = getComputedStyle(document.documentElement).getPropertyValue('--graph-quaternary');
+    chart;
 
     renderGraphByCsv(url, dataKey, labelKey, element, graphType) {
         const graphRenderer = this;
@@ -21,7 +22,11 @@ class GraphRenderer {
     }
 
     renderGraph(data, element, graphType, labels = null) {
-        new Chart(element, {
+        if (this.chart) {
+            this.chart.destroy();
+        }
+
+        this.chart = new Chart(element, {
             type: graphType,
             data: {
                 labels: labels,

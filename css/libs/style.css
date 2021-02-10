@@ -86,6 +86,10 @@ label > select {
 
 /* Buttons */
 
+.btn {
+    vertical-align: baseline!important;
+}
+
 .btn-primary {
     color: var(--accent);
     background: var(--primary);

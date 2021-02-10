@@ -25,13 +25,36 @@ class GraphRenderer {
     renderGraph(data, element, graphType, labels = null) {
         this.destroyAll();
 
+
+        const mustBeConverted = isNaN(data[0]) || data[0] === "";
+        let newData = [];
+        let uniqueLabels = [];
+
+        if (mustBeConverted){
+            const count = (input, arr) => arr.filter(x => x === input).length;
+            const onlyUnique = (value, index, self) =>{
+                return self.indexOf(value) === index;
+            }
+
+            uniqueLabels = labels.filter(onlyUnique);
+
+            for (let uniqueLabel of uniqueLabels){
+                newData.push(count(uniqueLabel, labels))
+            }
+        }
+
+        if (!mustBeConverted){
+            newData = data;
+            uniqueLabels = labels;
+        }
+
         this.chart = new Chart(element, {
             type: graphType,
             data: {
-                labels: labels,
+                labels: uniqueLabels,
                 datasets: [
                     {
-                        data: data,
+                        data: newData,
                         borderColor: this.getBorderColor(graphType),
                         backgroundColor: this.getBackgroundColor(data, graphType),
                         fillColor: this.colorPrimary,

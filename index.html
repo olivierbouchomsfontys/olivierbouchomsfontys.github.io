@@ -17,146 +17,158 @@
 
 <body>
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Vitality Living Lab</a>
-        </div>
-    </div>
-</nav>
-
-<main>
-    <div class="container">
-        <h1 class="title">Vitality Living Lab: data visualisation</h1>
-        <h1>Health data</h1>
-        <p>
-            Discover trends and correlations by viewing and comparing health and fitness data.
-        </p>
-        <div class="health-data-container">
-            <!-- TODO Add graphs and controls here -->
-        </div>
-        <div>
-            <h2>Demo elementen</h2>
-            <div class="row">
-                <div class="col col-sm-12">
-                    <label>
-                        Label
-                        <input type="text" class="input-primary" value="Input element" />
-                    </label>
-                </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Vitality Living Lab</a>
             </div>
-            <div class="row">
-                <div class="col col-sm-12">
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h1 class="title">Vitality Living Lab: data visualisation</h1>
+            <h1>Health data</h1>
+            <p>
+                Discover trends and correlations by viewing and comparing health and fitness data.
+            </p>
+            <div class="health-data-container">
+                <!-- TODO Add graphs and controls here -->
+            </div>
+            <div>
+                <!--            <h2>Demo elementen</h2>-->
+                <!--            <div class="row">-->
+                <!--                <div class="col col-sm-12">-->
+                <!--                    <label>-->
+                <!--                        Label-->
+                <!--                        <input type="text" class="input-primary" value="Input element" />-->
+                <!--                    </label>-->
+                <!--                </div>-->
+                <!--            </div>-->
+                <!--            <div class="row">-->
+                <!--                <div class="col col-sm-12">-->
+                <!--                    <label>-->
+                <!--                        Label-->
+                <!--                        <select class="select-primary">-->
+                <!--                            <option>1</option>-->
+                <!--                            <option>2</option>-->
+                <!--                            <option>3</option>-->
+                <!--                            <option>4</option>-->
+                <!--                            <option>5</option>-->
+                <!--                        </select>-->
+                <!--                    </label>-->
+                <!--                </div>-->
+                <!--            </div>-->
+                <!--            <div class="row">-->
+                <!--                <div class="col col-sm-12">-->
+                <!--                    <button class="btn btn-primary">-->
+                <!--                        Knop-->
+                <!--                    </button>-->
+                <!--                </div>-->
+                <!--            </div>-->
+            </div>
+            <h1>About Vitality Living Lab</h1>
+            <p>
+                The group of people with an inactive lifestyle is growing. Obesity in combination with other related
+                diseases leads to a huge increase in healthcare costs and loss of productivity. How can you tempt people
+                to
+                be healthy and active? That is what the Vitality Living Lab project has come up with for four years.
+            </p>
+            <p>
+                With the Sports & Technology Foundation as the driving force, the Cluster Sports & Technology (cluster
+                S&T)
+                has gradually been created in recent years from the strength of the Brainport region, by combining the
+                ambitions and opportunities of sports, government, knowledge institutions and the business community.
+                Partners from the cluster want to capitalize on this favorable starting position by actively seizing
+                (market) opportunities. It wants to strengthen the ecosystem, and thus realize a sporty and vital
+                society
+                with both social and economic impact.
+            </p>
+            <p>
+                A fundamentally different approach is required to respond to the social challenges and economic
+                opportunities in the field of sport and vitality. The classic form of linear innovation has only very
+                limited effect due to the complexity of the care and health chain.
+            </p>
+            <p>
+                That is why within the Vitality Living Lab project 14 cluster partners work together to strengthen our
+                regional innovation ecosystem around sport and vitality and to promote a healthy active lifestyle in
+                society. Cluster Sports & Technology is the initiator and project leader of this project.
+            </p>
+            <p>
+                <a href="https://sportsandtechnology.com/vitality-living-lab/">More info</a>
+            </p>
+
+            <!-- Add your site or application content here -->
+            <div class="select-dataset-container">
+                <form id="select-dataset">
+                    <label> Dataset
+                        <select class="select-primary"></select>
+                    </label>
+
                     <label>
-                        Label
-                        <select class="select-primary">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        Chart type
+                        <select class="select-primary" id="selectChartType">
+                            <option value="line">line</option>
+                            <option value="bar">bar</option>
+                            <option value="doughnut">doughnut</option>
+                            <option value="pie">pie</option>
+
                         </select>
                     </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col col-sm-12">
-                    <button class="btn btn-primary">
-                        Knop
+
+                    <button onclick="LoadCharts()" type="button" class="btn btn-primary">
+                        Get charts
                     </button>
-                </div>
+
+
+                </form>
+
             </div>
+            <div id="loading-message"></div>
+            <canvas id="chart1"></canvas>
+            <div id="3dPlot1"></div>
         </div>
-        <h1>About Vitality Living Lab</h1>
-        <p>
-            The group of people with an inactive lifestyle is growing. Obesity in combination with other related
-            diseases leads to a huge increase in healthcare costs and loss of productivity. How can you tempt people to
-            be healthy and active? That is what the Vitality Living Lab project has come up with for four years.
-        </p>
-        <p>
-            With the Sports & Technology Foundation as the driving force, the Cluster Sports & Technology (cluster S&T)
-            has gradually been created in recent years from the strength of the Brainport region, by combining the
-            ambitions and opportunities of sports, government, knowledge institutions and the business community.
-            Partners from the cluster want to capitalize on this favorable starting position by actively seizing
-            (market) opportunities. It wants to strengthen the ecosystem, and thus realize a sporty and vital society
-            with both social and economic impact.
-        </p>
-        <p>
-            A fundamentally different approach is required to respond to the social challenges and economic
-            opportunities in the field of sport and vitality. The classic form of linear innovation has only very
-            limited effect due to the complexity of the care and health chain.
-        </p>
-        <p>
-            That is why within the Vitality Living Lab project 14 cluster partners work together to strengthen our
-            regional innovation ecosystem around sport and vitality and to promote a healthy active lifestyle in
-            society. Cluster Sports & Technology is the initiator and project leader of this project.
-        </p>
-        <p>
-            <a href="https://sportsandtechnology.com/vitality-living-lab/">More info</a>
-        </p>
-    </div>
-</main>
+    </main>
 
-<p>Hello world!</p>
-
-<label>
-    Chart type
-    <select class="select-primary" id="selectChartType" onchange="LoadCharts()">
-        <option value="line">line</option>
-        <option value="bar">bar</option>
-        <option value="doughnut">doughnut</option>
-        <option value="pie">pie</option>
-
-    </select>
-</label>
-
-
-
-<div id="3dPlot1"></div>
-<canvas id="chart1"></canvas>
-<canvas id="chart2"></canvas>
-<canvas id="chart3"></canvas>
-<canvas id="chart4"></canvas>
-<canvas id="chart5"></canvas>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
-<script src="js/libs/bootstrap.js"></script>
-<script src="js/libs/bootstrap.bundle.js"></script>
-<script src="js/libs/bootstrap.js"></script>
-<script src="js/libs/bootstrap.bundle.js"></script>
-<script src="js/libs/Chart.min.js"></script>
-<script src="js/libs/d3.v6.min.js"></script>
-<script src="js/libs/plotly.v1.58.4.js"></script>
-<script src="js/graphRenderer.js"></script>
+    <script src="js/libs/bootstrap.js"></script>
+    <script src="js/libs/bootstrap.bundle.js"></script>
+    <script src="js/libs/bootstrap.js"></script>
+    <script src="js/libs/bootstrap.bundle.js"></script>
+    <script src="js/libs/Chart.min.js"></script>
+    <script src="js/libs/d3.v6.min.js"></script>
+    <script src="js/libs/plotly.v1.58.4.js"></script>
+    <script src="js/model/dataset.js"></script>
+    <script src="js/graphRenderer.js"></script>
+    <script src="js/csvSelect.js"></script>
 </body>
 
 
 
 
 <script>
-    
-    function LoadCharts(){
+
+    function LoadCharts() {
+        // todo make chart type compatiable with 3D charts
         const chartType = selectChartType.value;
-        
-        let graphRenderer = new GraphRenderer();
-        graphRenderer.render3dPlotByCsv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_shape.csv',document.getElementById('3dPlot1'), 'x', 'y', 'z', 'scatter3d');
 
-        graphRenderer.renderGraphByCsv('csv/LifeExpectation.csv', 'Life expectation', 'Age', document.getElementById("chart1"), chartType);
-        graphRenderer.renderGraphByCsv('csv/ConformExerciseNorm.csv', 'Conform exercise norm', 'Age', document.getElementById("chart2"), chartType);
-        graphRenderer.renderGraphByCsv('csv/SubscriptionToSports.csv', 'Subscription to sports', 'Age', document.getElementById("chart3"), chartType);
-        graphRenderer.renderGraphByCsv('csv/SportsWeekly.csv', 'Sports weekly', 'Age', document.getElementById("chart4"), chartType);
-        graphRenderer.renderGraphByCsv('csv/ParticipatesInSportsAssociation.csv', 'Participates in sports association', 'Age', document.getElementById("chart5"), chartType);
+        let graphRenderer3D = new GraphRenderer();
+        graphRenderer3D.render3dPlotByCsv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_shape.csv', document.getElementById('3dPlot1'), 'x', 'y', 'z', 'scatter3d');
 
-    } 
+        const selectedValue = selectElement.value;
+        const dataset = datasets.find(data => data.url === selectedValue);
+        console.log(selectedValue);
 
-    document.addEventListener("DOMContentLoaded", function() {
-        LoadCharts();
-    });
+        const graphRenderer = new GraphRenderer();
+        graphRenderer.renderGraphByCsv(dataset.url, dataset.dataKey, dataset.labelKey, document.getElementById("chart1"), chartType);
+
+    }
+
 </script>
 
 </html>

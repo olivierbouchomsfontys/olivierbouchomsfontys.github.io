@@ -126,7 +126,7 @@
         const dataGraphType = graphTypeSelector.options[graphTypeSelector.selectedIndex].getAttribute("data-graph-type");
 
         if (dataGraphType === '2d') {
-            graphRenderer.renderGraphByCsv(dataset.url, dataset.dataKey, dataset.labelKey, document.getElementById("chart1"), chartType);
+            graphRenderer.renderGraphByCsv(dataset.url, dataset.getDataKey(), dataset.getLabelKey(), document.getElementById("chart1"), chartType);
         } else {
             graphRenderer.render3dPlotByCsv(dataset.url, document.getElementById("3dPlot1"), dataset.xKey, dataset.yKey, dataset.zKey, chartType);
         }

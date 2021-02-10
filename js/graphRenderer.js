@@ -22,6 +22,8 @@ class GraphRenderer {
     }
 
     renderGraph(data, element, graphType, labels = null) {
+        console.log(data)
+
         if (this.chart) {
             this.chart.destroy();
         }

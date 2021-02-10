@@ -32,41 +32,6 @@
             <p>
                 Discover trends and correlations by viewing and comparing health and fitness data.
             </p>
-            <div class="health-data-container">
-                <!-- TODO Add graphs and controls here -->
-            </div>
-            <div>
-                <!--            <h2>Demo elementen</h2>-->
-                <!--            <div class="row">-->
-                <!--                <div class="col col-sm-12">-->
-                <!--                    <label>-->
-                <!--                        Label-->
-                <!--                        <input type="text" class="input-primary" value="Input element" />-->
-                <!--                    </label>-->
-                <!--                </div>-->
-                <!--            </div>-->
-                <!--            <div class="row">-->
-                <!--                <div class="col col-sm-12">-->
-                <!--                    <label>-->
-                <!--                        Label-->
-                <!--                        <select class="select-primary">-->
-                <!--                            <option>1</option>-->
-                <!--                            <option>2</option>-->
-                <!--                            <option>3</option>-->
-                <!--                            <option>4</option>-->
-                <!--                            <option>5</option>-->
-                <!--                        </select>-->
-                <!--                    </label>-->
-                <!--                </div>-->
-                <!--            </div>-->
-                <!--            <div class="row">-->
-                <!--                <div class="col col-sm-12">-->
-                <!--                    <button class="btn btn-primary">-->
-                <!--                        Knop-->
-                <!--                    </button>-->
-                <!--                </div>-->
-                <!--            </div>-->
-            </div>
             <h1>About Vitality Living Lab</h1>
             <p>
                 The group of people with an inactive lifestyle is growing. Obesity in combination with other related
@@ -114,14 +79,10 @@
                             <option value="pie">Pie</option>
                         </select>
                     </label>
-
                     <button onclick="LoadCharts()" type="button" class="btn btn-primary">
                         Get charts
                     </button>
-
-
                 </form>
-
             </div>
             <div id="loading-message"></div>
             <canvas id="chart1"></canvas>
@@ -146,9 +107,8 @@
     <script src="js/model/dataset.js"></script>
     <script src="js/graphRenderer.js"></script>
     <script src="js/csvSelect.js"></script>
+
 </body>
-
-
 
 <script>
 
@@ -161,7 +121,8 @@
 
         const selectedValue = selectElement.value;
         const dataset = datasets.find(data => data.url === selectedValue);
-        console.log(selectedValue);
+
+        const chartArea = document.getElementById("chart1");
 
         const graphRenderer = new GraphRenderer();
         graphRenderer.renderGraphByCsv(dataset.url, dataset.dataKey, dataset.labelKey, document.getElementById("chart1"), chartType);

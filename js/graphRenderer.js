@@ -35,7 +35,7 @@ class GraphRenderer {
                         highlightStroke: this.colorSecondary
                     }
                 ]
-            }
+            },
         });
     }
 

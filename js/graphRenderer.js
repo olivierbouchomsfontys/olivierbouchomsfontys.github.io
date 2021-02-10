@@ -16,16 +16,19 @@ class GraphRenderer {
     }
 
     renderGraph(data, element, graphType, labels = null) {
+
+        let colorPallete = ["#EAC435", "#345995", "#F37021", "#E40066", "#03CEA4"];
         new Chart(element, {
             type: graphType,
             data: {
                 labels: labels,
                 datasets: [
                     {
-                        data: data
+                        data: data,
+                        backgroundColor: colorPallete
                     }
                 ]
-            }
+            },
         });
     }
 

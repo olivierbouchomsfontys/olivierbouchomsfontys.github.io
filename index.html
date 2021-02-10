@@ -112,22 +112,17 @@
                             <option value="bar">bar</option>
                             <option value="doughnut">doughnut</option>
                             <option value="pie">pie</option>
-
                         </select>
                     </label>
-
                     <button onclick="LoadCharts()" type="button" class="btn btn-primary">
                         Get charts
-                    </button>
-
-
-                </form>
-
+                    </button>   
             </div>
             <div id="loading-message"></div>
             <canvas id="chart1"></canvas>
             <div id="3dPlot1"></div>
         </div>
+    </form>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -146,6 +141,7 @@
     <script src="js/model/dataset.js"></script>
     <script src="js/graphRenderer.js"></script>
     <script src="js/csvSelect.js"></script>
+
 </body>
 
 
@@ -162,6 +158,8 @@
         const selectedValue = selectElement.value;
         const dataset = datasets.find(data => data.url === selectedValue);
         console.log(selectedValue);
+
+        const chartArea = document.getElementById("chart1");
 
         const graphRenderer = new GraphRenderer();
         graphRenderer.renderGraphByCsv(dataset.url, dataset.dataKey, dataset.labelKey, document.getElementById("chart1"), chartType);

@@ -10,13 +10,25 @@ const selectFirstElement = document.querySelector("select#dataset-one");
 const selectSecondElement = document.querySelector("select#dataset-two");
 
 window.onload = function () {
-    selectFirstElement.innerHTML = buildDatasetDropdownOptions();
-    selectSecondElement.innerHTML = buildDatasetDropdownOptions();
+    selectFirstElement.innerHTML += buildDatasetDropdownOptions();
+    selectSecondElement.innerHTML += buildDatasetDropdownOptions(true);
 }
 
-function buildDatasetDropdownOptions(){
-    let html = ""
+selectFirstElement.addEventListener('change', () => {
+    selectSecondElement.innerHTML = buildDatasetDropdownOptions(true, selectFirstElement.value);
+});
+
+selectSecondElement.addEventListener('change', () => {
+    selectFirstElement.innerHTML = buildDatasetDropdownOptions(false, selectFirstElement.value);
+});
+
+function buildDatasetDropdownOptions(addEmpty = false, excludeValue = null){
+    let html = addEmpty ? "<option value=''>...</option>" : "";
     for (let dataset of datasets){
+        if (excludeValue !== null && dataset.url === excludeValue){
+            continue;
+        }
+
         html += "<option value='" + dataset.url + "'>" + dataset.name + "</option>"
     }
 

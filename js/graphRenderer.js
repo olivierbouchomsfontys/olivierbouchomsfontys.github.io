@@ -15,7 +15,7 @@ class GraphRenderer {
 
     }
 
-    renderMixedGraphByCsv(datasets, element, graphType){
+    renderMixedGraphByCsv(datasets, element, graphTypes){
         const graphRenderer = this;
         let labels;
         const data = [];
@@ -29,12 +29,13 @@ class GraphRenderer {
 
                     data.push({
                         label: dataset.name,
-                        data: csvData.map(d => d[dataset.dataKey])
+                        data: csvData.map(d => d[dataset.dataKey]),
+                        type: graphTypes[data.length]
                     });
 
                     // If all data objects have been pushed
                     if (data.length === datasets.length){
-                        graphRenderer.renderMixedGraph(element, graphType, data, labels)
+                        graphRenderer.renderMixedGraph(element, graphTypes[0], data, labels)
                     }
                 });
         }

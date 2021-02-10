@@ -6,10 +6,12 @@ datasets = [
     new Dataset("Subscription To Sports", "csv/SubscriptionToSports.csv", 'Subscription to sports', 'Age'),
 ]
 
-const selectElement = document.querySelector("#select-dataset select");
+const selectFirstElement = document.querySelector("select#dataset-one");
+const selectSecondElement = document.querySelector("select#dataset-two");
 
 window.onload = function () {
-    selectElement.innerHTML = buildDatasetDropdownOptions();
+    selectFirstElement.innerHTML = buildDatasetDropdownOptions();
+    selectSecondElement.innerHTML = buildDatasetDropdownOptions();
 }
 
 function buildDatasetDropdownOptions(){

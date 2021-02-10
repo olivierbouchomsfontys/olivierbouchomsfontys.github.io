@@ -15,6 +15,31 @@ class GraphRenderer {
 
     }
 
+    renderMixedGraphByCsv(datasets, element, graphType){
+        const graphRenderer = this;
+        let labels;
+        const data = [];
+
+        for (let dataset of datasets){
+            d3.csv(dataset.url)
+                .then((csvData) => {
+                    if (labels === undefined){
+                        labels = csvData.map(d => d[dataset.labelKey]);
+                    }
+
+                    data.push({
+                        label: dataset.name,
+                        data: csvData.map(d => d[dataset.dataKey])
+                    });
+
+                    // If all data objects have been pushed
+                    if (data.length === datasets.length){
+                        graphRenderer.renderMixedGraph(element, graphType, data, labels)
+                    }
+                });
+        }
+    }
+
     renderGraph(data, element, graphType, labels = null) {
         new Chart(element, {
             type: graphType,
@@ -27,6 +52,16 @@ class GraphRenderer {
                 ]
             }
         });
+    }
+
+    renderMixedGraph(element, graphType, datasets, labels) {
+        new Chart(element, {
+            type: graphType,
+            data: {
+                datasets: datasets,
+                labels: labels
+            }
+        }).update();
     }
 
     render3dPlotByCsv(url, element, xKey, yKey, zKey, graphType) {

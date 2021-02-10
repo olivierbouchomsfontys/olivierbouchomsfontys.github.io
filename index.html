@@ -101,13 +101,28 @@
             <!-- Add your site or application content here -->
             <div class="select-dataset-container">
                 <form id="select-dataset">
-                    <label> Dataset
-                        <select class="select-primary"></select>
+                    <label> Dataset 1
+                        <select id="dataset-one" class="select-primary"></select>
                     </label>
 
                     <label>
-                        Chart type
+                        Chart type 1
                         <select class="select-primary" id="selectChartType">
+                            <option value="line">line</option>
+                            <option value="bar">bar</option>
+                            <option value="doughnut">doughnut</option>
+                            <option value="pie">pie</option>
+
+                        </select>
+                    </label>
+
+                    <label> Dataset 2
+                        <select id="dataset-two" class="select-primary"></select>
+                    </label>
+
+                    <label>
+                        Chart type 2
+                        <select class="select-primary" id="selectChartTypeSecond">
                             <option value="line">line</option>
                             <option value="bar">bar</option>
                             <option value="doughnut">doughnut</option>
@@ -119,8 +134,6 @@
                     <button onclick="LoadCharts()" type="button" class="btn btn-primary">
                         Get charts
                     </button>
-
-
                 </form>
 
             </div>
@@ -155,16 +168,18 @@
     function LoadCharts() {
         // todo make chart type compatiable with 3D charts
         const chartType = selectChartType.value;
+        const chartTypeSecond = selectChartTypeSecond.value;
 
         let graphRenderer3D = new GraphRenderer();
-        graphRenderer3D.render3dPlotByCsv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_shape.csv', document.getElementById('3dPlot1'), 'x', 'y', 'z', 'scatter3d');
+        //graphRenderer3D.render3dPlotByCsv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_shape.csv', document.getElementById('3dPlot1'), 'x', 'y', 'z', 'scatter3d');
 
-        const selectedValue = selectElement.value;
-        const dataset = datasets.find(data => data.url === selectedValue);
-        console.log(selectedValue);
+        const chosenDatasets = [];
+        chosenDatasets.push(datasets.find(data => data.url === selectFirstElement.value))
+        chosenDatasets.push(datasets.find(data => data.url === selectSecondElement.value))
 
         const graphRenderer = new GraphRenderer();
-        graphRenderer.renderGraphByCsv(dataset.url, dataset.dataKey, dataset.labelKey, document.getElementById("chart1"), chartType);
+        graphRenderer.renderMixedGraphByCsv(chosenDatasets, document.getElementById("chart1"), chartType)
+        //graphRenderer.renderGraphByCsv(dataset.url, dataset.dataKey, dataset.labelKey, document.getElementById("chart1"), chartType);
 
     }
 

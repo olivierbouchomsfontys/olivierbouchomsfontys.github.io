@@ -15,7 +15,7 @@ window.onload = function () {
     selectFirstElement.innerHTML += buildDatasetDropdownOptions();
     selectSecondElement.innerHTML += buildDatasetDropdownOptions(true);
 
-    updateSelectChartType();
+    OnChangeDataSetOne();
 }
 
 selectFirstElement.addEventListener('change', () => {

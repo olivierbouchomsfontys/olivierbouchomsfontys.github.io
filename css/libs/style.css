@@ -220,3 +220,34 @@ label > select {
     display: block;
     width: 100%;
 }
+
+/* Dataset controls */
+
+.dataset-controls-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.dataset-controls:first-of-type {
+    padding-right: .5em;
+}
+.dataset-controls:last-of-type {
+    padding-left: .5em;
+}
+
+.dataset-controls label {
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+.dataset-controls label > span {
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+}
+
+/* Charts */
+
+.chart-container {
+    margin-top: 1em;
+}

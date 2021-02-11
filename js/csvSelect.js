@@ -8,7 +8,10 @@ window.onload = async function () {
 
     selectFirstElement.innerHTML += buildDatasetDropdownOptions();
     selectSecondElement.innerHTML += buildDatasetDropdownOptions(true);
+
     OnChangeDataSetOne();
+
+    LoadCharts();
 }
 
 

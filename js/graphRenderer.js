@@ -42,7 +42,7 @@ class GraphRenderer {
 
                     // If all data objects have been pushed
                     if (data.length === selectDatasets.length){
-                        graphRenderer.renderMixedGraph(element, graphTypes[0], data, labels)
+                        graphRenderer.renderMixedGraph(element, graphTypes, data, labels)
                     }
                 });
         }

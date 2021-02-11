@@ -42,7 +42,7 @@ class GraphRenderer {
 
                     // If all data objects have been pushed
                     if (data.length === selectDatasets.length){
-                        graphRenderer.renderMixedGraph(element, graphTypes[0], data, labels)
+                        graphRenderer.renderMixedGraph(element, graphTypes, data, labels)
                     }
                 });
         }
@@ -51,13 +51,36 @@ class GraphRenderer {
     renderGraph(data, element, graphType, labels = null) {
         this.destroyAll();
 
+
+        const mustBeConverted = isNaN(data[0]) || data[0] === "";
+        let newData = [];
+        let uniqueLabels = [];
+
+        if (mustBeConverted){
+            const count = (input, arr) => arr.filter(x => x === input).length;
+            const onlyUnique = (value, index, self) =>{
+                return self.indexOf(value) === index;
+            }
+
+            uniqueLabels = labels.filter(onlyUnique);
+
+            for (let uniqueLabel of uniqueLabels){
+                newData.push(count(uniqueLabel, labels))
+            }
+        }
+
+        if (!mustBeConverted){
+            newData = data;
+            uniqueLabels = labels;
+        }
+
         this.chart = new Chart(element, {
             type: graphType,
             data: {
-                labels: labels,
+                labels: uniqueLabels,
                 datasets: [
                     {
-                        data: data,
+                        data: newData,
                         borderColor: this.getBorderColor(graphType),
                         backgroundColor: this.getBackgroundColor(data, graphType),
                         fillColor: this.colorPrimary,
@@ -69,14 +92,38 @@ class GraphRenderer {
         });
     }
 
-    renderMixedGraph(element, graphType, datasets, labels) {
-        new Chart(element, {
-            type: graphType,
+    renderMixedGraph(element, graphTypes, datasets, labels) {
+        this.destroyAll();
+
+        let backgroundColor = null;
+
+        let isAllBar = true;
+
+        graphTypes.forEach(t => {
+            if (isAllBar) {
+                isAllBar = t === 'bar';
+            }
+        })
+
+        if (isAllBar) {
+            backgroundColor = this.getBackgroundColor(datasets[0].data, 'bar');
+        }
+
+        datasets.forEach(ds => {
+            ds.borderColor = this.getBorderColor(ds.type);
+            ds.backgroundColor = backgroundColor || this.getBackgroundColor(ds.data, ds.type);
+            ds.fillColor = this.colorPrimary;
+            ds.highlightFill = this.colorSecondary;
+            ds.highlightStroke = this.colorSecondary;
+        })
+
+        this.chart = new Chart(element, {
+            type: 'bar',
             data: {
                 datasets: datasets,
                 labels: labels
-            }
-        }).update();
+            },
+        });
     }
 
     render3dPlotByCsv(url, element, xKey, yKey, zKey, graphType) {
@@ -84,7 +131,6 @@ class GraphRenderer {
 
         Plotly.d3.csv(url, function (err, rows) {
             graphRenderer.render3dPlot(rows, element, xKey, yKey, zKey, graphType)
-
         });
     }
 
@@ -176,7 +222,7 @@ class GraphRenderer {
         }
     }
 
-    destroyAll(){
+    destroyAll () {
         if (this.chart) {
             this.chart.destroy();
         }

@@ -57,7 +57,7 @@ function buildDatasetDropdownOptions(addEmpty = false, excludeValue = null) {
             continue;
         }
 
-        html += "<option data-set-type='" + dataset.constructor.name + "' value='" + dataset.url + "'>" + dataset.name + "</option>"
+        html += "<option data-set-name='"+dataset.name+"' data-set-type='"+dataset.constructor.name+"' value='" + dataset.url + "'>" + dataset.name + "</option>"
     }
 
     return html;

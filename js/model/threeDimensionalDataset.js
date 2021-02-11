@@ -4,20 +4,14 @@ class ThreeDimensionalDataSet{
     xKey;
     yKey;
     zKey;
+    headers;
 
-    getLabelKey() {
-        return this.xKey;
-    }
-
-    getDataKey() {
-        return this.yKey;
-    }
-
-    constructor(name, url, xKey, yKey, zKey) {
+    constructor(name, url, xKey, yKey, zKey, headers) {
         this.name = name;
         this.url = url;
         this.xKey = xKey;
         this.yKey = yKey;
         this.zKey = zKey;
+        this.headers = headers;
     }
 }

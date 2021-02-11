@@ -83,6 +83,10 @@
                             Chart Y as
                             <select class="select-primary" id="selectChartYAs"></select>
                         </label>
+                        <label>
+                            Chart Z as
+                            <select class="select-primary" id="selectChartZAs"></select>
+                        </label>
                     </div>
                 </div>
 
@@ -109,6 +113,10 @@
                         <label>
                             Chart Y as
                             <select class="select-primary" id="selectTwoChartYAs"></select>
+                        </label>
+                        <label>
+                            Chart Z as
+                            <select class="select-primary" id="selectTwoChartZAs"></select>
                         </label>
                     </div>
                 </div>
@@ -168,8 +176,10 @@
         const graphTypeSelector = document.getElementById("selectChartType")
         const selectChartXAsSelector = document.getElementById("selectChartXAs")
         const selectChartYAsSelector = document.getElementById("selectChartYAs")
+        const selectChartZAsSelector = document.getElementById("selectChartZAs")
         const selectTwoChartXAsSelector = document.getElementById("selectTwoChartXAs")
         const selectTwoChartYAsSelector = document.getElementById("selectTwoChartYAs")
+        const selectTwoChartZAsSelector = document.getElementById("selectTwoChartZAs")
         const dataGraphType = graphTypeSelector.options[graphTypeSelector.selectedIndex].getAttribute("data-graph-type");
 
         const datasetOne = datasets.find(data => data.name === selectFirstElement.options[selectFirstElement.selectedIndex].getAttribute("data-set-name"));
@@ -182,7 +192,7 @@
                 graphRenderer.renderGraphByCsv(datasetOne.url, selectChartYAsSelector.value, selectChartXAsSelector.value, document.getElementById("chart1"), chartType);
             } else {
                 console.log(datasetOne);
-                graphRenderer.render3dPlotByCsv(datasetOne.url, document.getElementById("3dPlot1"), datasetOne.xKey, datasetOne.yKey, datasetOne.zKey, chartType);
+                graphRenderer.render3dPlotByCsv(datasetOne.url, document.getElementById("3dPlot1"), selectChartXAsSelector.value, selectChartYAsSelector.value, selectChartZAsSelector.value, chartType);
             }
         } else {
             const chosenDatasets = [];
@@ -198,29 +208,47 @@
 
 
     function updateSelectAxes() {
-        const dataset = datasets.find(data => data.url === selectFirstElement.value)
+        const dataset = datasets.find(data => data.name === selectFirstElement.options[selectFirstElement.selectedIndex].getAttribute("data-set-name"));
+        console.log(dataset);
         let htmlX = "";
         let htmlY = "";
+        let htmlZ = "";
         for (let graphType of dataset.headers) {
             htmlX += "<option data-graph-x='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
             htmlY += "<option data-graph-y='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
+            htmlZ += "<option data-graph-z='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
         }
 
         document.getElementById("selectChartXAs").innerHTML = htmlX;
         document.getElementById("selectChartYAs").innerHTML = htmlY;
+        if (dataset.constructor.name === ThreeDimensionalDataSet.name){
+            document.getElementById("selectChartZAs").innerHTML = htmlZ;
+            document.getElementById("selectChartZAs").parentElement.style.display = "block";
+        }else{
+            document.getElementById("selectChartZAs").parentElement.style.display = "none";
+        }
     }
 
     function updateSelectTwoAxes() {
-        const dataset = datasets.find(data => data.url === selectSecondElement.value)
+        const dataset = datasets.find(data => data.name === selectSecondElement.options[selectSecondElement.selectedIndex].getAttribute("data-set-name"))
         let htmlX = "";
         let htmlY = "";
+        let htmlZ = "";
         for (let graphType of dataset.headers) {
             htmlX += "<option data-graph-x='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
             htmlY += "<option data-graph-y='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
+            htmlZ += "<option data-graph-z='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
         }
 
         document.getElementById("selectTwoChartXAs").innerHTML = htmlX;
         document.getElementById("selectTwoChartYAs").innerHTML = htmlY;
+
+        if (dataset.constructor.name === ThreeDimensionalDataSet.name){
+            document.getElementById("selectTwoChartZAs").innerHTML = htmlZ;
+            document.getElementById("selectTwoChartZAs").parentElement.style.display = "block";
+        }else{
+            document.getElementById("selectTwoChartZAs").parentElement.style.display = "none";
+        }
     }
 
 

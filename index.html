@@ -17,51 +17,51 @@
 
 <body>
 
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Vitality Living Lab</a>
-            </div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Vitality Living Lab</a>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <main>
-        <div class="container">
-            <h1 class="title">Vitality Living Lab: data visualisation</h1>
-            <h1>Health data</h1>
-            <p>
-                Discover trends and correlations by viewing and comparing health and fitness data.
-            </p>
-            <h1>About Vitality Living Lab</h1>
-            <p>
-                The group of people with an inactive lifestyle is growing. Obesity in combination with other related
-                diseases leads to a huge increase in healthcare costs and loss of productivity. How can you tempt people
-                to
-                be healthy and active? That is what the Vitality Living Lab project has come up with for four years.
-            </p>
-            <p>
-                With the Sports & Technology Foundation as the driving force, the Cluster Sports & Technology (cluster
-                S&T)
-                has gradually been created in recent years from the strength of the Brainport region, by combining the
-                ambitions and opportunities of sports, government, knowledge institutions and the business community.
-                Partners from the cluster want to capitalize on this favorable starting position by actively seizing
-                (market) opportunities. It wants to strengthen the ecosystem, and thus realize a sporty and vital
-                society
-                with both social and economic impact.
-            </p>
-            <p>
-                A fundamentally different approach is required to respond to the social challenges and economic
-                opportunities in the field of sport and vitality. The classic form of linear innovation has only very
-                limited effect due to the complexity of the care and health chain.
-            </p>
-            <p>
-                That is why within the Vitality Living Lab project 14 cluster partners work together to strengthen our
-                regional innovation ecosystem around sport and vitality and to promote a healthy active lifestyle in
-                society. Cluster Sports & Technology is the initiator and project leader of this project.
-            </p>
-            <p>
-                <a href="https://sportsandtechnology.com/vitality-living-lab/">More info</a>
-            </p>
+<main>
+    <div class="container">
+        <h1 class="title">Vitality Living Lab: data visualisation</h1>
+        <h1>Health data</h1>
+        <p>
+            Discover trends and correlations by viewing and comparing health and fitness data.
+        </p>
+        <h1>About Vitality Living Lab</h1>
+        <p>
+            The group of people with an inactive lifestyle is growing. Obesity in combination with other related
+            diseases leads to a huge increase in healthcare costs and loss of productivity. How can you tempt people
+            to
+            be healthy and active? That is what the Vitality Living Lab project has come up with for four years.
+        </p>
+        <p>
+            With the Sports & Technology Foundation as the driving force, the Cluster Sports & Technology (cluster
+            S&T)
+            has gradually been created in recent years from the strength of the Brainport region, by combining the
+            ambitions and opportunities of sports, government, knowledge institutions and the business community.
+            Partners from the cluster want to capitalize on this favorable starting position by actively seizing
+            (market) opportunities. It wants to strengthen the ecosystem, and thus realize a sporty and vital
+            society
+            with both social and economic impact.
+        </p>
+        <p>
+            A fundamentally different approach is required to respond to the social challenges and economic
+            opportunities in the field of sport and vitality. The classic form of linear innovation has only very
+            limited effect due to the complexity of the care and health chain.
+        </p>
+        <p>
+            That is why within the Vitality Living Lab project 14 cluster partners work together to strengthen our
+            regional innovation ecosystem around sport and vitality and to promote a healthy active lifestyle in
+            society. Cluster Sports & Technology is the initiator and project leader of this project.
+        </p>
+        <p>
+            <a href="https://sportsandtechnology.com/vitality-living-lab/">More info</a>
+        </p>
 
         <!-- Add your site or application content here -->
         <div class="select-dataset-container">
@@ -71,17 +71,19 @@
                         <select id="dataset-one" class="select-primary" onchange="OnChangeDataSetOne()"></select>
                     </label>
                     <label>
-                        Chart X as
-                        <select class="select-primary" id="selectChartXAs"></select>
-                    </label>
-                    <label>
-                        Chart Y as
-                        <select class="select-primary" id="selectChartYAs"></select>
-                    </label>
-                    <label>
                         Chart type 1
                         <select class="select-primary" id="selectChartType"></select>
                     </label>
+                    <div class="dataset-one-as">
+                        <label>
+                            Chart X as
+                            <select class="select-primary" id="selectChartXAs"></select>
+                        </label>
+                        <label>
+                            Chart Y as
+                            <select class="select-primary" id="selectChartYAs"></select>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="additional-dataset">
@@ -89,14 +91,6 @@
                         <select id="dataset-two" class="select-primary" onchange="OnChangeDataSetTwo()"></select>
                     </label>
 
-                    <label>
-                        Chart X as
-                        <select class="select-primary" id="selectTwoChartXAs"></select>
-                    </label>
-                    <label>
-                        Chart Y as
-                        <select class="select-primary" id="selectTwoChartYAs"></select>
-                    </label>
                     <label>
                         Chart type 2
                         <select class="select-primary" id="selectChartTypeSecond">
@@ -106,6 +100,17 @@
                             <option value="pie">pie</option>
                         </select>
                     </label>
+
+                    <div class="dataset-one-as">
+                        <label>
+                            Chart X as
+                            <select class="select-primary" id="selectTwoChartXAs"></select>
+                        </label>
+                        <label>
+                            Chart Y as
+                            <select class="select-primary" id="selectTwoChartYAs"></select>
+                        </label>
+                    </div>
                 </div>
 
                 <button onclick="LoadCharts()" type="button" class="btn btn-primary">
@@ -135,7 +140,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
 <script src="js/libs/bootstrap.js"></script>
@@ -167,22 +172,23 @@
         const selectTwoChartYAsSelector = document.getElementById("selectTwoChartYAs")
         const dataGraphType = graphTypeSelector.options[graphTypeSelector.selectedIndex].getAttribute("data-graph-type");
 
+        const datasetOne = datasets.find(data => data.name === selectFirstElement.options[selectFirstElement.selectedIndex].getAttribute("data-set-name"));
+
+
         if (selectSecondElement.value === "") {
             // If the second dataset selector is not set, display normal graph
-            const dataset = datasets.find(data => data.url === selectFirstElement.value)
-            graphRenderer.renderGraphByCsv(dataset.url, selectChartYAsSelector.value, selectChartXAsSelector.value, document.getElementById("chart1"), chartType);
-
+            console.log(selectFirstElement);
             if (dataGraphType === '2d') {
-                graphRenderer.renderGraphByCsv(dataset.url, selectChartYAsSelector.value, selectChartXAsSelector.value, document.getElementById("chart1"), chartType);
+                graphRenderer.renderGraphByCsv(datasetOne.url, selectChartYAsSelector.value, selectChartXAsSelector.value, document.getElementById("chart1"), chartType);
             } else {
-                graphRenderer.render3dPlotByCsv(dataset.url, document.getElementById("3dPlot1"), dataset.xKey, dataset.yKey, dataset.zKey, chartType);
+                console.log(datasetOne);
+                graphRenderer.render3dPlotByCsv(datasetOne.url, document.getElementById("3dPlot1"), datasetOne.xKey, datasetOne.yKey, datasetOne.zKey, chartType);
             }
         } else {
             const chosenDatasets = [];
 
-            datasetOne = datasets.find(data => data.url === selectFirstElement.value)
             chosenDatasets.push(new selectDataset(datasetOne, selectChartXAsSelector.value, selectChartYAsSelector.value))
-            datasetTwo = datasets.find(data => data.url === selectSecondElement.value)
+            const datasetTwo = datasets.find(data => data.name === selectSecondElement.options[selectSecondElement.selectedIndex].getAttribute("data-set-name"));
             chosenDatasets.push(new selectDataset(datasetTwo, selectTwoChartXAsSelector.value, selectTwoChartYAsSelector.value))
             const graphTypes = [chartType, chartTypeSecond];
 

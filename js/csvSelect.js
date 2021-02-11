@@ -38,7 +38,7 @@ async function processData(name, url, supports3D, data) {
     var dataLines = data.split(/\r\n|\n/);
     const headers = dataLines[0].split(',');
     if (supports3D) {
-        await datasets.push(new ThreeDimensionalDataSet(name, url, 'a', 'b', headers))
+        await datasets.push(new ThreeDimensionalDataSet(name, url, 'a', 'b', 'c', headers))
     }
     else {
         await datasets.push(new Dataset(name, url, 'a', 'b', headers))

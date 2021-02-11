@@ -5,14 +5,6 @@ class Dataset{
     labelKey;
     headers;
 
-    getDataKey() {
-        return this.dataKey;
-    }
-
-    getLabelKey() {
-        return this.labelKey;
-    }
-
     constructor(name, url, dataKey, labelKey, headers) {
         this.name = name;
         this.url = url;

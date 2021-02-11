@@ -22,27 +22,27 @@ class GraphRenderer {
 
     }
 
-    renderMixedGraphByCsv(datasets, element, graphTypes){
+    renderMixedGraphByCsv(selectDatasets, element, graphTypes){
         const graphRenderer = this;
         let labels;
         const data = [];
 
-        for (let dataset of datasets){
-            d3.csv(dataset.url)
+        for (let selectDataset of selectDatasets){
+            d3.csv(selectDataset.dataset.url)
                 .then((csvData) => {
                     if (labels === undefined){
-                        labels = csvData.map(d => d[dataset.labelKey]);
+                        labels = csvData.map(d => d[selectDataset.xAs]);
                     }
 
                     data.push({
-                        label: dataset.name,
-                        data: csvData.map(d => d[dataset.dataKey]),
+                        label: selectDataset.dataset.name,
+                        data: csvData.map(d => d[selectDataset.yAs]),
                         type: graphTypes[data.length]
                     });
 
                     // If all data objects have been pushed
-                    if (data.length === datasets.length){
-                        graphRenderer.renderMixedGraph(element, graphTypes, data, labels)
+                    if (data.length === selectDatasets.length){
+                        graphRenderer.renderMixedGraph(element, graphTypes[0], data, labels)
                     }
                 });
         }

@@ -17,112 +17,128 @@
 
 <body>
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Vitality Living Lab</a>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Vitality Living Lab</a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<main>
-    <div class="container">
-        <h1 class="title">Vitality Living Lab: data visualisation</h1>
-        <h1>Health data</h1>
-        <p>
-            Discover trends and correlations by viewing and comparing health and fitness data.
-        </p>
-        <h1>About Vitality Living Lab</h1>
-        <p>
-            The group of people with an inactive lifestyle is growing. Obesity in combination with other related
-            diseases leads to a huge increase in healthcare costs and loss of productivity. How can you tempt people
-            to
-            be healthy and active? That is what the Vitality Living Lab project has come up with for four years.
-        </p>
-        <p>
-            With the Sports & Technology Foundation as the driving force, the Cluster Sports & Technology (cluster
-            S&T)
-            has gradually been created in recent years from the strength of the Brainport region, by combining the
-            ambitions and opportunities of sports, government, knowledge institutions and the business community.
-            Partners from the cluster want to capitalize on this favorable starting position by actively seizing
-            (market) opportunities. It wants to strengthen the ecosystem, and thus realize a sporty and vital
-            society
-            with both social and economic impact.
-        </p>
-        <p>
-            A fundamentally different approach is required to respond to the social challenges and economic
-            opportunities in the field of sport and vitality. The classic form of linear innovation has only very
-            limited effect due to the complexity of the care and health chain.
-        </p>
-        <p>
-            That is why within the Vitality Living Lab project 14 cluster partners work together to strengthen our
-            regional innovation ecosystem around sport and vitality and to promote a healthy active lifestyle in
-            society. Cluster Sports & Technology is the initiator and project leader of this project.
-        </p>
-        <p>
-            <a href="https://sportsandtechnology.com/vitality-living-lab/">More info</a>
-        </p>
+    <main>
+        <div class="container">
+            <h1 class="title">Vitality Living Lab: data visualisation</h1>
+            <h1>Health data</h1>
+            <p>
+                Discover trends and correlations by viewing and comparing health and fitness data.
+            </p>
+            <h1>About Vitality Living Lab</h1>
+            <p>
+                The group of people with an inactive lifestyle is growing. Obesity in combination with other related
+                diseases leads to a huge increase in healthcare costs and loss of productivity. How can you tempt people
+                to
+                be healthy and active? That is what the Vitality Living Lab project has come up with for four years.
+            </p>
+            <p>
+                With the Sports & Technology Foundation as the driving force, the Cluster Sports & Technology (cluster
+                S&T)
+                has gradually been created in recent years from the strength of the Brainport region, by combining the
+                ambitions and opportunities of sports, government, knowledge institutions and the business community.
+                Partners from the cluster want to capitalize on this favorable starting position by actively seizing
+                (market) opportunities. It wants to strengthen the ecosystem, and thus realize a sporty and vital
+                society
+                with both social and economic impact.
+            </p>
+            <p>
+                A fundamentally different approach is required to respond to the social challenges and economic
+                opportunities in the field of sport and vitality. The classic form of linear innovation has only very
+                limited effect due to the complexity of the care and health chain.
+            </p>
+            <p>
+                That is why within the Vitality Living Lab project 14 cluster partners work together to strengthen our
+                regional innovation ecosystem around sport and vitality and to promote a healthy active lifestyle in
+                society. Cluster Sports & Technology is the initiator and project leader of this project.
+            </p>
+            <p>
+                <a href="https://sportsandtechnology.com/vitality-living-lab/">More info</a>
+            </p>
 
-        <!-- Add your site or application content here -->
-        <div class="select-dataset-container">
-            <form id="select-dataset">
-                <div class="dataset-select">
-                    <label> Dataset 1
-                        <select id="dataset-one" class="select-primary" onchange="updateSelectChartType()"></select>
-                    </label>
+            <!-- Add your site or application content here -->
+            <div class="select-dataset-container">
+                <form id="select-dataset">
+                    <div class="dataset-select">
+                        <label> Dataset 1
+                            <select id="dataset-one" class="select-primary" onchange="OnChangeDataSetOne()"></select>
+                        </label>
+                        <label>
+                            Chart X as
+                            <select class="select-primary" id="selectChartXAs"></select>
+                        </label>
+                        <label>
+                            Chart Y as
+                            <select class="select-primary" id="selectChartYAs"></select>
+                        </label>
+                        <label>
+                            Chart type 1
+                            <select class="select-primary" id="selectChartType"></select>
+                        </label>
+                    </div>
 
-                    <label>
-                        Chart type 1
-                        <select class="select-primary" id="selectChartType"></select>
-                    </label>
-                </div>
+                    <div class="additional-dataset">
+                        <label> Dataset 2
+                            <select id="dataset-two" class="select-primary"  onchange="OnChangeDataSetTwo()" ></select>
+                        </label>
 
-                <div class="additional-dataset">
-                    <label> Dataset 2
-                        <select id="dataset-two" class="select-primary"></select>
-                    </label>
+                        <label>
+                            Chart X as
+                            <select class="select-primary" id="selectTwoChartXAs"></select>
+                        </label>
+                        <label>
+                            Chart Y as
+                            <select class="select-primary" id="selectTwoChartYAs"></select>
+                        </label>
+                        <label>
+                            Chart type 2
+                            <select class="select-primary" id="selectChartTypeSecond">
+                                <option value="line">line</option>
+                                <option value="bar">bar</option>
+                                <option value="doughnut">doughnut</option>
+                                <option value="pie">pie</option>
+                            </select>
+                        </label>
+                    </div>
 
-                    <label>
-                        Chart type 2
-                        <select class="select-primary" id="selectChartTypeSecond">
-                            <option value="line">line</option>
-                            <option value="bar">bar</option>
-                            <option value="doughnut">doughnut</option>
-                            <option value="pie">pie</option>
-                        </select>
-                    </label>
-                </div>
+                    <button onclick="LoadCharts()" type="button" class="btn btn-primary">
+                        Get charts
+                    </button>
+                </form>
 
-                <button onclick="LoadCharts()" type="button" class="btn btn-primary">
-                    Get charts
-                </button>
-            </form>
-
+            </div>
+            <div id="loading-message"></div>
+            <canvas id="chart1"></canvas>
+            <div id="3dPlot1"></div>
         </div>
-        <div id="loading-message"></div>
-        <canvas id="chart1"></canvas>
-        <div id="3dPlot1"></div>
-    </div>
-</main>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
-<script src="js/libs/bootstrap.js"></script>
-<script src="js/libs/bootstrap.bundle.js"></script>
-<script src="js/libs/bootstrap.js"></script>
-<script src="js/libs/bootstrap.bundle.js"></script>
-<script src="js/libs/Chart.min.js"></script>
-<script src="js/libs/d3.v6.min.js"></script>
-<script src="js/libs/plotly.v1.58.4.js"></script>
-<script src="js/libs/please.js"></script>
-<script src="js/model/dataset.js"></script>
-<script src="js/model/threeDimensionalDataset.js"></script>
-<script src="js/model/graphType.js"></script>
-<script src="js/graphRenderer.js"></script>
-<script src="js/csvSelect.js"></script>
+    <script src="js/libs/bootstrap.js"></script>
+    <script src="js/libs/bootstrap.bundle.js"></script>
+    <script src="js/libs/bootstrap.js"></script>
+    <script src="js/libs/bootstrap.bundle.js"></script>
+    <script src="js/libs/Chart.min.js"></script>
+    <script src="js/libs/d3.v6.min.js"></script>
+    <script src="js/libs/plotly.v1.58.4.js"></script>
+    <script src="js/libs/please.js"></script>
+    <script src="js/model/dataset.js"></script>
+    <script src="js/model/selectDataset.js"></script>
+    <script src="js/model/threeDimensionalDataset.js"></script>
+    <script src="js/model/graphType.js"></script>
+    <script src="js/graphRenderer.js"></script>
+    <script src="js/csvSelect.js"></script>
 </body>
 
 <script>
@@ -132,26 +148,72 @@
         const chartType = selectChartType.value;
         const chartTypeSecond = selectChartTypeSecond.value;
         const graphTypeSelector = document.getElementById("selectChartType")
+        const selectChartXAsSelector = document.getElementById("selectChartXAs")
+        const selectChartYAsSelector = document.getElementById("selectChartYAs")
+        const selectTwoChartXAsSelector = document.getElementById("selectTwoChartXAs")
+        const selectTwoChartYAsSelector = document.getElementById("selectTwoChartYAs")
         const dataGraphType = graphTypeSelector.options[graphTypeSelector.selectedIndex].getAttribute("data-graph-type");
 
         if (selectSecondElement.value === "") {
             // If the second dataset selector is not set, display normal graph
             const dataset = datasets.find(data => data.url === selectFirstElement.value)
-            graphRenderer.renderGraphByCsv(dataset.url, dataset.dataKey, dataset.labelKey, document.getElementById("chart1"), chartType);
+            graphRenderer.renderGraphByCsv(dataset.url,selectChartYAsSelector.value, selectChartXAsSelector.value, document.getElementById("chart1"), chartType);
 
             if (dataGraphType === '2d') {
-                graphRenderer.renderGraphByCsv(dataset.url, dataset.dataKey, dataset.labelKey, document.getElementById("chart1"), chartType);
+                graphRenderer.renderGraphByCsv(dataset.url, selectChartYAsSelector.value, selectChartXAsSelector.value, document.getElementById("chart1"), chartType);
             } else {
                 graphRenderer.render3dPlotByCsv(dataset.url, document.getElementById("3dPlot1"), dataset.xKey, dataset.yKey, dataset.zKey, chartType);
             }
         } else {
             const chosenDatasets = [];
-            chosenDatasets.push(datasets.find(data => data.url === selectFirstElement.value))
-            chosenDatasets.push(datasets.find(data => data.url === selectSecondElement.value))
+
+            datasetOne  =datasets.find(data => data.url === selectFirstElement.value)         
+            chosenDatasets.push(new selectDataset(datasetOne,selectChartXAsSelector.value, selectChartYAsSelector.value))
+            datasetTwo  =datasets.find(data => data.url === selectSecondElement.value)         
+            chosenDatasets.push(new selectDataset(datasetTwo,selectTwoChartXAsSelector.value, selectTwoChartYAsSelector.value))
             const graphTypes = [chartType, chartTypeSecond];
 
             graphRenderer.renderMixedGraphByCsv(chosenDatasets, document.getElementById("chart1"), graphTypes)
         }
+    }
+
+
+
+    function updateSelectAxes() {
+        const dataset = datasets.find(data => data.url === selectFirstElement.value)
+        let htmlX = "";
+        let htmlY = "";
+        for (let graphType of dataset.headers) {
+            htmlX += "<option data-graph-x='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
+            htmlY += "<option data-graph-y='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
+        }
+
+        document.getElementById("selectChartXAs").innerHTML = htmlX;
+        document.getElementById("selectChartYAs").innerHTML = htmlY;
+    }
+
+function updateSelectTwoAxes() {
+    const dataset = datasets.find(data => data.url === selectSecondElement.value)
+    let htmlX = "";
+    let htmlY = "";
+    for (let graphType of dataset.headers) {
+        htmlX += "<option data-graph-x='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
+        htmlY += "<option data-graph-y='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
+    }
+
+    document.getElementById("selectTwoChartXAs").innerHTML = htmlX;
+    document.getElementById("selectTwoChartYAs").innerHTML = htmlY;
+}
+
+
+    function OnChangeDataSetTwo(){
+        updateSelectTwoAxes();
+    }
+
+
+    function OnChangeDataSetOne() {
+        updateSelectChartType();
+        updateSelectAxes();
     }
 
     function updateSelectChartType() {

@@ -111,3 +111,51 @@ label > select {
     background: rgba(0, 0, 0, 0.1)!important;
 }
 
+/* Cards */
+
+.card {
+    border: none;
+}
+
+.card-row {
+    margin-top: 2em;
+}
+
+.card-click:hover * {
+    border-radius: 3px;
+    text-decoration: none!important;
+    background: var(--secondary);
+    color: white;
+}
+
+.card-click {
+    text-decoration: none!important;
+}
+
+.card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card-icon p:first-child {
+    visibility: hidden;
+    display: none;
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+
+.card-icon {
+    color: var(--text-secondary);
+    font-size: 5em;
+}
+
+.card-icon p {
+    color: var(--text-accent);
+    font-weight: bold;
+    font-size: 23px;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 0;
+}

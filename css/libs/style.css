@@ -113,7 +113,11 @@ label > select {
 
 /* Cards */
 
-.card {
+.card-click {
+    border: none;
+}
+
+.card-click .card {
     border: none;
 }
 
@@ -158,4 +162,61 @@ label > select {
     text-align: center;
     margin-top: 1em;
     margin-bottom: 0;
+}
+
+/* Widgets */
+
+.widget-row {
+    margin-top: 2em;
+}
+
+.widget-card {
+    text-decoration: none;
+}
+
+.widget-card {
+    background: transparent;
+    border-radius: 3px;
+    color: var(--text-primary);
+    padding: .8em;
+}
+
+.widget-card:hover {
+    background: var(--secondary);
+}
+
+.widget-card:hover * {
+    background: var(--secondary);
+    color: white;
+}
+
+.widget-card i {
+    color: var(--text-secondary);
+    font-size: 5em;
+}
+
+.widget-card .card-icon {
+    align-items: start;
+}
+
+.widget-card-title {
+    color: var(--text-accent);
+}
+
+.widget-card-content {
+    margin-top: 1em;
+    min-height: 6em;
+}
+
+.widget-card-thumbnail {
+    width: 100%;
+    height: 10em;
+    object-fit: cover;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+.widget-card-content .btn {
+    display: block;
+    width: 100%;
 }

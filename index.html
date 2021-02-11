@@ -31,85 +31,68 @@
         <p>
             Discover trends and correlations by viewing and comparing activity data.
         </p>
-        <div class="select-dataset-container">
-            <form id="select-dataset">
-                <div class="dataset-select">
-                    <label> Dataset 1
-                        <select id="dataset-one" class="select-primary" onchange="OnChangeDataSetOne()"></select>
-                    </label>
-                    <label>
-                        Chart type 1
-                        <select class="select-primary" id="selectChartType"></select>
-                    </label>
-                    <div class="dataset-one-as">
-                        <label>
-                            Chart X as
-                            <select class="select-primary" id="selectChartXAs"></select>
-                        </label>
-                        <label>
-                            Chart Y as
-                            <select class="select-primary" id="selectChartYAs"></select>
-                        </label>
-                        <label>
-                            Chart Z as
-                            <select class="select-primary" id="selectChartZAs"></select>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="additional-dataset">
-                    <label> Dataset 2
-                        <select id="dataset-two" class="select-primary" onchange="OnChangeDataSetTwo()"></select>
-                    </label>
-
-                    <label>
-                        Chart type 2
-                        <select class="select-primary" id="selectChartTypeSecond">
-                            <option value="line">line</option>
-                            <option value="bar">bar</option>
-                            <option value="doughnut">doughnut</option>
-                            <option value="pie">pie</option>
-                        </select>
-                    </label>
-
-                    <div class="dataset-one-as">
-                        <label>
-                            Chart X as
-                            <select class="select-primary" id="selectTwoChartXAs"></select>
-                        </label>
-                        <label>
-                            Chart Y as
-                            <select class="select-primary" id="selectTwoChartYAs"></select>
-                        </label>
-                        <label>
-                            Chart Z as
-                            <select class="select-primary" id="selectTwoChartZAs"></select>
-                        </label>
-                    </div>
-                </div>
-
-                <button onclick="LoadCharts()" type="button" class="btn btn-primary">
-                    Get charts
-                </button>
-            </form>
-
-            <div>
+        <div class="dataset-controls-container">
+            <div class="dataset-controls">
                 <label>
-                    Online CSV
-                    <input type="url" id="customUrl"
-                           value="https://data.cityofnewyork.us/api/views/833y-fsy8/rows.csv">
-                    <button onclick="LoadCustomUrlChart()" type="button" class="btn btn-primary">
-                        Get charts
-                    </button>
+                    <span>Dataset</span>
+                    <select id="dataset-one" class="select-primary" onchange="OnChangeDataSetOne(); LoadCharts();"></select>
+                </label>
+                <label>
+                    <span>Chart type 1</span>
+                    <select class="select-primary" id="selectChartType" onchange="LoadCharts()"></select>
+                </label>
+                <div class="dataset-one-as">
+                    <label>
+                        <span>X axis data</span>
+                        <select class="select-primary" id="selectChartXAs" onchange="LoadCharts()"></select>
+                    </label>
+                    <label>
+                        <span>Y axis data</span>
+                        <select class="select-primary" id="selectChartYAs" onchange="LoadCharts()"></select>
+                    </label>
+                    <label>
+                        <span>Z axis data</span>
+                        <select class="select-primary" id="selectChartZAs" onchange="LoadCharts()"></select>
+                    </label>
+                </div>
+            </div>
+            <div class="dataset-controls">
+                <label>
+                    <span>Dataset to compare</span>
+                    <select id="dataset-two" class="select-primary" onchange="OnChangeDataSetTwo(); LoadCharts();"></select>
+                </label>
+
+                <label>
+                    <span>Chart type</span>
+                    <select class="select-primary" id="selectChartTypeSecond" onchange="LoadCharts()">
+                        <option value="line">line</option>
+                        <option value="bar">bar</option>
+                        <option value="doughnut">doughnut</option>
+                        <option value="pie">pie</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span>X axis data</span>
+                    <select class="select-primary" id="selectTwoChartXAs" onchange="LoadCharts()"></select>
+                </label>
+
+                <label>
+                    <span>Y axis data</span>
+                    <select class="select-primary" id="selectTwoChartYAs" onchange="LoadCharts()"></select>
+                </label>
+
+                <label>
+                    <span>Z axis data</span>
+                    <select class="select-primary" id="selectTwoChartZAs" onchange="LoadCharts()"></select>
                 </label>
             </div>
         </div>
 
-        <div id="loading-message"></div>
-        <canvas id="chart1"></canvas>
-        <div id="3dPlot1"></div>
-        </form>
-
+        <div class="chart-container">
+            <canvas id="chart1"></canvas>
+            <div id="3dPlot1"></div>
+        </div>
     </div>
 </main>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -173,10 +156,9 @@
         }
     }
 
-
     function updateSelectAxes() {
         const dataset = datasets.find(data => data.name === selectFirstElement.options[selectFirstElement.selectedIndex].getAttribute("data-set-name"));
-        console.log(dataset);
+
         let htmlX = "";
         let htmlY = "";
         let htmlZ = "";
@@ -188,10 +170,21 @@
 
         document.getElementById("selectChartXAs").innerHTML = htmlX;
         document.getElementById("selectChartYAs").innerHTML = htmlY;
-        if (dataset.constructor.name === ThreeDimensionalDataSet.name){
+
+        // Check first for X axis
+        const firstOptionElement = document.querySelectorAll("#selectChartXAs option")[0];
+
+        firstOptionElement.setAttribute('selected', 'selected');
+
+        // Check second for Y axis
+        const secondOptionElement = document.querySelectorAll("#selectChartYAs option")[1];
+
+        secondOptionElement.setAttribute('selected', 'selected');
+
+        if (dataset.constructor.name === ThreeDimensionalDataSet.name) {
             document.getElementById("selectChartZAs").innerHTML = htmlZ;
             document.getElementById("selectChartZAs").parentElement.style.display = "block";
-        }else{
+        } else {
             document.getElementById("selectChartZAs").parentElement.style.display = "none";
         }
     }
@@ -210,27 +203,30 @@
         document.getElementById("selectTwoChartXAs").innerHTML = htmlX;
         document.getElementById("selectTwoChartYAs").innerHTML = htmlY;
 
-        if (dataset.constructor.name === ThreeDimensionalDataSet.name){
+        const firstOptionElement = document.querySelectorAll("#selectTwoChartXAs option")[0];
+
+        firstOptionElement.setAttribute('selected', 'selected');
+
+        // Check second for Y axis
+        const secondOptionElement = document.querySelectorAll("#selectTwoChartYAs option")[1];
+
+        secondOptionElement.setAttribute('selected', 'selected');
+
+        if (dataset.constructor.name === ThreeDimensionalDataSet.name) {
             document.getElementById("selectTwoChartZAs").innerHTML = htmlZ;
             document.getElementById("selectTwoChartZAs").parentElement.style.display = "block";
-        }else{
+        } else {
             document.getElementById("selectTwoChartZAs").parentElement.style.display = "none";
         }
     }
-
 
     function OnChangeDataSetTwo() {
         updateSelectTwoAxes();
     }
 
-
     function OnChangeDataSetOne() {
         updateSelectChartType();
         updateSelectAxes();
-    }
-
-    function LoadCustomUrlChart() {
-        graphRenderer.renderGraphByCsv(document.getElementById("customUrl").value, "PERP_AGE_GROUP", "PERP_AGE_GROUP", document.getElementById("chart1"), "bar");
     }
 
     function updateSelectChartType() {
@@ -255,7 +251,6 @@
         }
         document.getElementById("selectChartType").innerHTML = html;
     }
-
 </script>
 
 </html>

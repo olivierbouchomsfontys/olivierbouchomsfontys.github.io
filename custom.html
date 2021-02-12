@@ -29,30 +29,32 @@
 <main>
     <div class="container">
         <h1 class="title">Visualize a custom dataset</h1>
+
+        <div>
+            <label>
+                Online CSV
+                <input type="url" id="customUrl"
+                       value="https://data.cityofnewyork.us/api/views/833y-fsy8/rows.csv">
+                <button onclick="LoadCsv()" type="button" class="btn btn-primary">
+                    Get charts
+                </button>
+            </label>
+
+            <label>
+                <span>Chart type</span>
+                <select class="select-primary" id="selectChartType" onchange="LoadCharts()"></select>
+            </label>
+
+            <label>
+                <span>X axis data</span>
+                <select class="select-primary" id="selectChartXAs" onchange="LoadCharts()"></select>
+            </label>
+        </div>
+
+        <canvas id="chart1"></canvas>
     </div>
 
-    <div>
-        <label>
-            Online CSV
-            <input type="url" id="customUrl"
-                   value="https://data.cityofnewyork.us/api/views/833y-fsy8/rows.csv">
-            <button onclick="LoadCsv()" type="button" class="btn btn-primary">
-                Get charts
-            </button>
-        </label>
 
-        <label>
-            <span>Chart type</span>
-            <select class="select-primary" id="selectChartType" onchange="LoadCharts()"></select>
-        </label>
-
-        <label>
-            <span>X axis data</span>
-            <select class="select-primary" id="selectChartXAs" onchange="LoadCharts()"></select>
-        </label>
-    </div>
-
-    <canvas id="chart1"></canvas>
 
 </main>
 

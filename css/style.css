@@ -248,6 +248,16 @@ label > select {
     align-items: center;
 }
 
+label .custom-csv-input {
+    margin-left: 1em;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.custom-csv-input input{
+    margin-right: 1em;
+}
+
 /* Charts */
 
 .chart-container {

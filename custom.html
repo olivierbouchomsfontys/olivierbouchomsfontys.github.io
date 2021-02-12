@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/libs/bootstrap.css">
     <link rel="stylesheet" href="css/libs/bootstrap-grid.css">
     <link rel="stylesheet" href="css/libs/bootstrap-reboot.css">
-    <link rel="stylesheet" href="css/libs/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 
     <meta name="theme-color" content="#fafafa">
@@ -30,30 +30,32 @@
     <div class="container">
         <h1 class="title">Visualize a custom dataset</h1>
 
-        <div>
+        <div class="dataset-controls">
             <label>
-                Online CSV
-                <input type="url" id="customUrl"
-                       value="https://data.cityofnewyork.us/api/views/833y-fsy8/rows.csv">
-                <button onclick="LoadCsv()" type="button" class="btn btn-primary">
-                    Get charts
-                </button>
+                <span>Online CSV</span>
+                <div class="custom-csv-input">
+                    <input class="input-primary" type="url" id="customUrl"
+                           value="https://data.cityofnewyork.us/api/views/833y-fsy8/rows.csv">
+                    <button onclick="LoadCsv()" type="button" class="btn btn-primary">
+                        Get charts
+                    </button>
+                </div>
             </label>
+            <div>
+                <label>
+                    <span>Chart type</span>
+                    <select class="select-primary" id="selectChartType" onchange="LoadCharts()"></select>
+                </label>
 
-            <label>
-                <span>Chart type</span>
-                <select class="select-primary" id="selectChartType" onchange="LoadCharts()"></select>
-            </label>
-
-            <label>
-                <span>X axis data</span>
-                <select class="select-primary" id="selectChartXAs" onchange="LoadCharts()"></select>
-            </label>
+                <label>
+                    <span>X axis data</span>
+                    <select class="select-primary" id="selectChartXAs" onchange="LoadCharts()"></select>
+                </label>
+            </div>
         </div>
 
         <canvas id="chart1"></canvas>
     </div>
-
 
 
 </main>
@@ -92,7 +94,7 @@
             .then((csvData) => {
                 resolvedKeys = Object.keys(csvData[0]);
                 let htmlX = "";
-                for (let key of resolvedKeys){
+                for (let key of resolvedKeys) {
                     htmlX += "<option data-graph-x='" + key + "' value='" + key + "'>" + key + "</option>"
                 }
 

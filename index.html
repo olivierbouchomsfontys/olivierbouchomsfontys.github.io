@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/libs/bootstrap-grid.css">
     <link rel="stylesheet" href="css/libs/bootstrap-reboot.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 
     <meta name="theme-color" content="#fafafa">
 </head>
@@ -20,237 +21,157 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="cards.html">Vitality Living Lab</a>
+            <a class="navbar-brand" href="index.html">Vitality Living Lab</a>
         </div>
     </div>
 </nav>
 
-<main>
-    <div class="container">
-        <h1>Activity data</h1>
-        <p>
-            Discover trends and correlations by viewing and comparing activity data.
-        </p>
-        <div class="dataset-controls-container">
-            <div class="dataset-controls">
-                <label>
-                    <span>Dataset</span>
-                    <select id="dataset-one" class="select-primary" onchange="OnChangeDataSetOne(); LoadCharts();"></select>
-                </label>
-                <label>
-                    <span>Chart type 1</span>
-                    <select class="select-primary" id="selectChartType" onchange="LoadCharts()"></select>
-                </label>
-                <div class="dataset-one-as">
-                    <label>
-                        <span>X axis data</span>
-                        <select class="select-primary" id="selectChartXAs" onchange="LoadCharts()"></select>
-                    </label>
-                    <label>
-                        <span>Y axis data</span>
-                        <select class="select-primary" id="selectChartYAs" onchange="LoadCharts()"></select>
-                    </label>
-                    <label>
-                        <span>Z axis data</span>
-                        <select class="select-primary" id="selectChartZAs" onchange="LoadCharts()"></select>
-                    </label>
-                </div>
+    <main>
+        <div class="container">
+            <h1 class="title">Vitality Living Lab: data visualisation</h1>
+            <h1>About Vitality Living Lab</h1>
+            <div class="about-vll">
+                <p>
+                    The group of people with an inactive lifestyle is growing. Obesity in combination with other related
+                    diseases leads to a huge increase in healthcare costs and loss of productivity. How can you tempt people
+                    to
+                    be healthy and active? That is what the Vitality Living Lab project has come up with for four years.
+                </p>
+                <p>
+                    With the Sports & Technology Foundation as the driving force, the Cluster Sports & Technology (cluster
+                    S&T)
+                    has gradually been created in recent years from the strength of the Brainport region, by combining the
+                    ambitions and opportunities of sports, government, knowledge institutions and the business community.
+                    Partners from the cluster want to capitalize on this favorable starting position by actively seizing
+                    (market) opportunities. It wants to strengthen the ecosystem, and thus realize a sporty and vital
+                    society
+                    with both social and economic impact.
+                </p>
+                <p>
+                    A fundamentally different approach is required to respond to the social challenges and economic
+                    opportunities in the field of sport and vitality. The classic form of linear innovation has only very
+                    limited effect due to the complexity of the care and health chain.
+                </p>
+                <p>
+                    That is why within the Vitality Living Lab project 14 cluster partners work together to strengthen our
+                    regional innovation ecosystem around sport and vitality and to promote a healthy active lifestyle in
+                    society. Cluster Sports & Technology is the initiator and project leader of this project.
+                </p>
+                <p>
+                    <a href="https://sportsandtechnology.com/vitality-living-lab/">More info</a>
+                </p>
             </div>
-            <div class="dataset-controls">
-                <label>
-                    <span>Dataset to compare</span>
-                    <select id="dataset-two" class="select-primary" onchange="OnChangeDataSetTwo(); LoadCharts();"></select>
-                </label>
-
-                <label>
-                    <span>Chart type</span>
-                    <select class="select-primary" id="selectChartTypeSecond" onchange="LoadCharts()">
-                        <option value="line">line</option>
-                        <option value="bar">bar</option>
-                        <option value="doughnut">doughnut</option>
-                        <option value="pie">pie</option>
-                    </select>
-                </label>
-
-                <label>
-                    <span>X axis data</span>
-                    <select class="select-primary" id="selectTwoChartXAs" onchange="LoadCharts()"></select>
-                </label>
-
-                <label>
-                    <span>Y axis data</span>
-                    <select class="select-primary" id="selectTwoChartYAs" onchange="LoadCharts()"></select>
-                </label>
-
-                <label>
-                    <span>Z axis data</span>
-                    <select class="select-primary" id="selectTwoChartZAs" onchange="LoadCharts()"></select>
-                </label>
+            <h1>Themes</h1>
+            <div class="row card-row">
+                <a class="col col-sm-6 col-lg-3 card-click" href="widgets.html">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-users"></i>
+                                <p>Demographic</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a class="col col-sm-6 col-lg-3 card-click" href="widgets.html">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-school"></i>
+                                <p>Education</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a class="col col-sm-6 col-lg-3 card-click" href="widgets.html">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fab fa-pagelines"></i>
+                                <p>Environment</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a class="col col-sm-6 col-lg-3 card-click" href="widgets.html">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-heartbeat"></i>
+                                <p>Health</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="row card-row">
+                <a class="col col-sm-6 col-lg-3 card-click" href="widgets.html">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-road"></i>
+                                <p>Infrastructure</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a class="col col-sm-6 col-lg-3 card-click" href="widgets.html">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-user-friends"></i>
+                                <p>Social</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a class="col col-sm-6 col-lg-3 card-click" href="widgets.html">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-futbol"></i>
+                                <p>Sports</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a class="col col-sm-6 col-lg-3 card-click" href="widgets.html">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-suitcase"></i>
+                                <p>Work</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="row card-row">
+                <a class="col col-sm-12 card-click" href="custom.html">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-chart-line"></i>
+                                <p>Custom dataset</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
+    </main>
 
-        <div class="chart-container">
-            <canvas id="chart1"></canvas>
-            <div id="3dPlot1"></div>
-        </div>
-    </div>
-</main>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
-<script src="js/libs/bootstrap.js"></script>
-<script src="js/libs/bootstrap.bundle.js"></script>
-<script src="js/libs/bootstrap.js"></script>
-<script src="js/libs/bootstrap.bundle.js"></script>
-<script src="js/libs/Chart.min.js"></script>
-<script src="js/libs/d3.v6.min.js"></script>
-<script src="js/libs/plotly.v1.58.4.js"></script>
-<script src="js/libs/please.js"></script>
-<script src="js/model/dataset.js"></script>
-<script src="js/model/selectDataset.js"></script>
-<script src="js/model/threeDimensionalDataset.js"></script>
-<script src="js/model/graphType.js"></script>
-<script src="js/graphRenderer.js"></script>
-<script src="js/csvSelect.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js"></script>
+    <script src="js/libs/bootstrap.js"></script>
+    <script src="js/libs/bootstrap.bundle.js"></script>
+    <script src="js/libs/bootstrap.js"></script>
+    <script src="js/libs/bootstrap.bundle.js"></script>
 </body>
-
-<script>
-    const graphRenderer = new GraphRenderer();
-
-    function LoadCharts() {
-        const chartType = selectChartType.value;
-        const chartTypeSecond = selectChartTypeSecond.value;
-        const graphTypeSelector = document.getElementById("selectChartType")
-        const selectChartXAsSelector = document.getElementById("selectChartXAs")
-        const selectChartYAsSelector = document.getElementById("selectChartYAs")
-        const selectChartZAsSelector = document.getElementById("selectChartZAs")
-        const selectTwoChartXAsSelector = document.getElementById("selectTwoChartXAs")
-        const selectTwoChartYAsSelector = document.getElementById("selectTwoChartYAs")
-        const selectTwoChartZAsSelector = document.getElementById("selectTwoChartZAs")
-        const dataGraphType = graphTypeSelector.options[graphTypeSelector.selectedIndex].getAttribute("data-graph-type");
-
-        const datasetOne = datasets.find(data => data.name === selectFirstElement.options[selectFirstElement.selectedIndex].getAttribute("data-set-name"));
-
-
-        if (selectSecondElement.value === "") {
-            // If the second dataset selector is not set, display normal graph
-            console.log(selectFirstElement);
-            if (dataGraphType === '2d') {
-                graphRenderer.renderGraphByCsv(datasetOne.url, selectChartYAsSelector.value, selectChartXAsSelector.value, document.getElementById("chart1"), chartType);
-            } else {
-                console.log(datasetOne);
-                graphRenderer.render3dPlotByCsv(datasetOne.url, document.getElementById("3dPlot1"), selectChartXAsSelector.value, selectChartYAsSelector.value, selectChartZAsSelector.value, chartType);
-            }
-        } else {
-            const chosenDatasets = [];
-
-            chosenDatasets.push(new selectDataset(datasetOne, selectChartXAsSelector.value, selectChartYAsSelector.value))
-            const datasetTwo = datasets.find(data => data.name === selectSecondElement.options[selectSecondElement.selectedIndex].getAttribute("data-set-name"));
-            chosenDatasets.push(new selectDataset(datasetTwo, selectTwoChartXAsSelector.value, selectTwoChartYAsSelector.value))
-            const graphTypes = [chartType, chartTypeSecond];
-
-            graphRenderer.renderMixedGraphByCsv(chosenDatasets, document.getElementById("chart1"), graphTypes)
-        }
-    }
-
-    function updateSelectAxes() {
-        const dataset = datasets.find(data => data.name === selectFirstElement.options[selectFirstElement.selectedIndex].getAttribute("data-set-name"));
-
-        let htmlX = "";
-        let htmlY = "";
-        let htmlZ = "";
-        for (let graphType of dataset.headers) {
-            htmlX += "<option data-graph-x='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
-            htmlY += "<option data-graph-y='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
-            htmlZ += "<option data-graph-z='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
-        }
-
-        document.getElementById("selectChartXAs").innerHTML = htmlX;
-        document.getElementById("selectChartYAs").innerHTML = htmlY;
-
-        // Check first for X axis
-        const firstOptionElement = document.querySelectorAll("#selectChartXAs option")[0];
-
-        firstOptionElement.setAttribute('selected', 'selected');
-
-        // Check second for Y axis
-        const secondOptionElement = document.querySelectorAll("#selectChartYAs option")[1];
-
-        secondOptionElement.setAttribute('selected', 'selected');
-
-        if (dataset.constructor.name === ThreeDimensionalDataSet.name) {
-            document.getElementById("selectChartZAs").innerHTML = htmlZ;
-            document.getElementById("selectChartZAs").parentElement.style.display = "grid";
-        } else {
-            document.getElementById("selectChartZAs").parentElement.style.display = "none";
-        }
-    }
-
-    function updateSelectTwoAxes() {
-        const dataset = datasets.find(data => data.name === selectSecondElement.options[selectSecondElement.selectedIndex].getAttribute("data-set-name"))
-        let htmlX = "";
-        let htmlY = "";
-        let htmlZ = "";
-        for (let graphType of dataset.headers) {
-            htmlX += "<option data-graph-x='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
-            htmlY += "<option data-graph-y='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
-            htmlZ += "<option data-graph-z='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
-        }
-
-        document.getElementById("selectTwoChartXAs").innerHTML = htmlX;
-        document.getElementById("selectTwoChartYAs").innerHTML = htmlY;
-
-        const firstOptionElement = document.querySelectorAll("#selectTwoChartXAs option")[0];
-
-        firstOptionElement.setAttribute('selected', 'selected');
-
-        // Check second for Y axis
-        const secondOptionElement = document.querySelectorAll("#selectTwoChartYAs option")[1];
-
-        secondOptionElement.setAttribute('selected', 'selected');
-
-        if (dataset.constructor.name === ThreeDimensionalDataSet.name) {
-            document.getElementById("selectTwoChartZAs").innerHTML = htmlZ;
-            document.getElementById("selectTwoChartZAs").parentElement.style.display = "block";
-        } else {
-            document.getElementById("selectTwoChartZAs").parentElement.style.display = "none";
-        }
-    }
-
-    function OnChangeDataSetTwo() {
-        updateSelectTwoAxes();
-    }
-
-    function OnChangeDataSetOne() {
-        updateSelectChartType();
-        updateSelectAxes();
-    }
-
-    function updateSelectChartType() {
-        const knownGraphTypes = [
-            new GraphType("line", "2d"),
-            new GraphType("bar", "2d"),
-            new GraphType("doughnut", "2d"),
-            new GraphType("pie", "2d"),
-            new GraphType("scatter3d", "3d"),
-        ];
-
-        const dataSetType = selectFirstElement.options[selectFirstElement.selectedIndex].getAttribute("data-set-type");
-        const support3D = dataSetType === ThreeDimensionalDataSet.name;
-        let html = ""
-        for (let graphType of knownGraphTypes) {
-
-            if (!support3D && graphType.type === '3d') {
-                continue;
-            }
-
-            html += "<option data-graph-type='" + graphType.type + "' value='" + graphType.name + "'>" + graphType.name + "</option>"
-        }
-        document.getElementById("selectChartType").innerHTML = html;
-    }
-</script>
 
 </html>

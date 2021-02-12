@@ -1,0 +1,256 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title>HackIT Vitality Living Lab</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/libs/bootstrap.css">
+    <link rel="stylesheet" href="css/libs/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/libs/bootstrap-reboot.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">Vitality Living Lab</a>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <h1>Activity data</h1>
+        <p>
+            Discover trends and correlations by viewing and comparing activity data.
+        </p>
+        <div class="dataset-controls-container">
+            <div class="dataset-controls">
+                <label>
+                    <span>Dataset</span>
+                    <select id="dataset-one" class="select-primary" onchange="OnChangeDataSetOne(); LoadCharts();"></select>
+                </label>
+                <label>
+                    <span>Chart type 1</span>
+                    <select class="select-primary" id="selectChartType" onchange="LoadCharts()"></select>
+                </label>
+                <div class="dataset-one-as">
+                    <label>
+                        <span>X axis data</span>
+                        <select class="select-primary" id="selectChartXAs" onchange="LoadCharts()"></select>
+                    </label>
+                    <label>
+                        <span>Y axis data</span>
+                        <select class="select-primary" id="selectChartYAs" onchange="LoadCharts()"></select>
+                    </label>
+                    <label>
+                        <span>Z axis data</span>
+                        <select class="select-primary" id="selectChartZAs" onchange="LoadCharts()"></select>
+                    </label>
+                </div>
+            </div>
+            <div class="dataset-controls">
+                <label>
+                    <span>Dataset to compare</span>
+                    <select id="dataset-two" class="select-primary" onchange="OnChangeDataSetTwo(); LoadCharts();"></select>
+                </label>
+
+                <label>
+                    <span>Chart type</span>
+                    <select class="select-primary" id="selectChartTypeSecond" onchange="LoadCharts()">
+                        <option value="line">line</option>
+                        <option value="bar">bar</option>
+                        <option value="doughnut">doughnut</option>
+                        <option value="pie">pie</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span>X axis data</span>
+                    <select class="select-primary" id="selectTwoChartXAs" onchange="LoadCharts()"></select>
+                </label>
+
+                <label>
+                    <span>Y axis data</span>
+                    <select class="select-primary" id="selectTwoChartYAs" onchange="LoadCharts()"></select>
+                </label>
+
+                <label>
+                    <span>Z axis data</span>
+                    <select class="select-primary" id="selectTwoChartZAs" onchange="LoadCharts()"></select>
+                </label>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="chart1"></canvas>
+            <div id="3dPlot1"></div>
+        </div>
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="js/libs/bootstrap.js"></script>
+<script src="js/libs/bootstrap.bundle.js"></script>
+<script src="js/libs/bootstrap.js"></script>
+<script src="js/libs/bootstrap.bundle.js"></script>
+<script src="js/libs/Chart.min.js"></script>
+<script src="js/libs/d3.v6.min.js"></script>
+<script src="js/libs/plotly.v1.58.4.js"></script>
+<script src="js/libs/please.js"></script>
+<script src="js/model/dataset.js"></script>
+<script src="js/model/selectDataset.js"></script>
+<script src="js/model/threeDimensionalDataset.js"></script>
+<script src="js/model/graphType.js"></script>
+<script src="js/graphRenderer.js"></script>
+<script src="js/csvSelect.js"></script>
+</body>
+
+<script>
+    const graphRenderer = new GraphRenderer();
+
+    function LoadCharts() {
+        const chartType = selectChartType.value;
+        const chartTypeSecond = selectChartTypeSecond.value;
+        const graphTypeSelector = document.getElementById("selectChartType")
+        const selectChartXAsSelector = document.getElementById("selectChartXAs")
+        const selectChartYAsSelector = document.getElementById("selectChartYAs")
+        const selectChartZAsSelector = document.getElementById("selectChartZAs")
+        const selectTwoChartXAsSelector = document.getElementById("selectTwoChartXAs")
+        const selectTwoChartYAsSelector = document.getElementById("selectTwoChartYAs")
+        const selectTwoChartZAsSelector = document.getElementById("selectTwoChartZAs")
+        const dataGraphType = graphTypeSelector.options[graphTypeSelector.selectedIndex].getAttribute("data-graph-type");
+
+        const datasetOne = datasets.find(data => data.name === selectFirstElement.options[selectFirstElement.selectedIndex].getAttribute("data-set-name"));
+
+
+        if (selectSecondElement.value === "") {
+            // If the second dataset selector is not set, display normal graph
+            console.log(selectFirstElement);
+            if (dataGraphType === '2d') {
+                graphRenderer.renderGraphByCsv(datasetOne.url, selectChartYAsSelector.value, selectChartXAsSelector.value, document.getElementById("chart1"), chartType);
+            } else {
+                console.log(datasetOne);
+                graphRenderer.render3dPlotByCsv(datasetOne.url, document.getElementById("3dPlot1"), selectChartXAsSelector.value, selectChartYAsSelector.value, selectChartZAsSelector.value, chartType);
+            }
+        } else {
+            const chosenDatasets = [];
+
+            chosenDatasets.push(new selectDataset(datasetOne, selectChartXAsSelector.value, selectChartYAsSelector.value))
+            const datasetTwo = datasets.find(data => data.name === selectSecondElement.options[selectSecondElement.selectedIndex].getAttribute("data-set-name"));
+            chosenDatasets.push(new selectDataset(datasetTwo, selectTwoChartXAsSelector.value, selectTwoChartYAsSelector.value))
+            const graphTypes = [chartType, chartTypeSecond];
+
+            graphRenderer.renderMixedGraphByCsv(chosenDatasets, document.getElementById("chart1"), graphTypes)
+        }
+    }
+
+    function updateSelectAxes() {
+        const dataset = datasets.find(data => data.name === selectFirstElement.options[selectFirstElement.selectedIndex].getAttribute("data-set-name"));
+
+        let htmlX = "";
+        let htmlY = "";
+        let htmlZ = "";
+        for (let graphType of dataset.headers) {
+            htmlX += "<option data-graph-x='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
+            htmlY += "<option data-graph-y='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
+            htmlZ += "<option data-graph-z='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
+        }
+
+        document.getElementById("selectChartXAs").innerHTML = htmlX;
+        document.getElementById("selectChartYAs").innerHTML = htmlY;
+
+        // Check first for X axis
+        const firstOptionElement = document.querySelectorAll("#selectChartXAs option")[0];
+
+        firstOptionElement.setAttribute('selected', 'selected');
+
+        // Check second for Y axis
+        const secondOptionElement = document.querySelectorAll("#selectChartYAs option")[1];
+
+        secondOptionElement.setAttribute('selected', 'selected');
+
+        if (dataset.constructor.name === ThreeDimensionalDataSet.name) {
+            document.getElementById("selectChartZAs").innerHTML = htmlZ;
+            document.getElementById("selectChartZAs").parentElement.style.display = "grid";
+        } else {
+            document.getElementById("selectChartZAs").parentElement.style.display = "none";
+        }
+    }
+
+    function updateSelectTwoAxes() {
+        const dataset = datasets.find(data => data.name === selectSecondElement.options[selectSecondElement.selectedIndex].getAttribute("data-set-name"))
+        let htmlX = "";
+        let htmlY = "";
+        let htmlZ = "";
+        for (let graphType of dataset.headers) {
+            htmlX += "<option data-graph-x='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
+            htmlY += "<option data-graph-y='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
+            htmlZ += "<option data-graph-z='" + graphType + "' value='" + graphType + "'>" + graphType + "</option>"
+        }
+
+        document.getElementById("selectTwoChartXAs").innerHTML = htmlX;
+        document.getElementById("selectTwoChartYAs").innerHTML = htmlY;
+
+        const firstOptionElement = document.querySelectorAll("#selectTwoChartXAs option")[0];
+
+        firstOptionElement.setAttribute('selected', 'selected');
+
+        // Check second for Y axis
+        const secondOptionElement = document.querySelectorAll("#selectTwoChartYAs option")[1];
+
+        secondOptionElement.setAttribute('selected', 'selected');
+
+        if (dataset.constructor.name === ThreeDimensionalDataSet.name) {
+            document.getElementById("selectTwoChartZAs").innerHTML = htmlZ;
+            document.getElementById("selectTwoChartZAs").parentElement.style.display = "block";
+        } else {
+            document.getElementById("selectTwoChartZAs").parentElement.style.display = "none";
+        }
+    }
+
+    function OnChangeDataSetTwo() {
+        updateSelectTwoAxes();
+    }
+
+    function OnChangeDataSetOne() {
+        updateSelectChartType();
+        updateSelectAxes();
+    }
+
+    function updateSelectChartType() {
+        const knownGraphTypes = [
+            new GraphType("line", "2d"),
+            new GraphType("bar", "2d"),
+            new GraphType("doughnut", "2d"),
+            new GraphType("pie", "2d"),
+            new GraphType("scatter3d", "3d"),
+        ];
+
+        const dataSetType = selectFirstElement.options[selectFirstElement.selectedIndex].getAttribute("data-set-type");
+        const support3D = dataSetType === ThreeDimensionalDataSet.name;
+        let html = ""
+        for (let graphType of knownGraphTypes) {
+
+            if (!support3D && graphType.type === '3d') {
+                continue;
+            }
+
+            html += "<option data-graph-type='" + graphType.type + "' value='" + graphType.name + "'>" + graphType.name + "</option>"
+        }
+        document.getElementById("selectChartType").innerHTML = html;
+    }
+</script>
+
+</html>
